@@ -28,10 +28,8 @@ class Database:
             self.cursor.execute(q)
 
     def execute(self, query, args={}):
-        print(query)
         self.cursor.execute(query, args)
         row = self.cursor.fetchall()
-        print(row)
         self.db.commit()
         return row
 

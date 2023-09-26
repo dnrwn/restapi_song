@@ -23,6 +23,12 @@ def response(a, b=None, c=None):
         }
 
 
+@app.route('/', methods=['GET'])
+def default():
+    a = 'http://%s:%s/func_1 or func_2' %(ip, port)
+    return a
+
+
 # DB 연동 기능 : 조회, 수정
 @app.route('/func_1', methods=['GET', 'POST'])
 def func_1():
@@ -53,12 +59,14 @@ def func_2():
         a = db.Database.execute(query.sql_get)
 
         b = response(1)
-        b['data'] = a
+        b['data'] = a[-1]
         return b
     except Exception as m:
         return response(0, 'Insert', c=str(m))
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port='70', debug=True)
+    ip = '0.0.0.0'
+    port = 70
+    app.run(host=ip, port=port, debug=True)
 
