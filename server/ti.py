@@ -1,19 +1,20 @@
-def response(a):
-    if a == 0:
-        return {
-            "result": "NG"
-        }
-    else:
-        return {
-            "Error"
-        }
+# data 크기 print 연습
 
+import sys
+# y = 2147483649
+# yy = 9223372036854775807
 
-print(type(response(0)))
-print(response(0))
+# x = ''
+a = 'a'
+b = '가'
+# c = 'Sample String'
+d = 'A'
 
-a = response(0)
-a['ddd'] = {""
-            "rrr":"aa"}
-
-print(a)
+# print(sys.getsizeof(y))
+# print(sys.getsizeof(yy))
+# print(sys.getsizeof(x))
+print(sys.getsizeof(a))
+print(sys.getsizeof(b))
+# print(sys.getsizeof(c))
+print(sys.getsizeof(d))
+#
