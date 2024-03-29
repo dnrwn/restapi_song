@@ -1,12 +1,19 @@
+2024-03-29 업데이트
+- 기존 : main.py에서 Postman data를 가공해서 Query.py에 전달
+  - 전달 값의 [필수, 선택] 성격을 함수 인자로 부여
+- 변경 : main.py에서 Postman data를 가공하지 않고 그대로 Query.py에 전달 
+  - 필수 > Dict 내 key 값으로 value 호출
+  - 선택 > .get 기능을 통해 예외 처리
+
 1. Postman -> REST API Server -> mySQL
 2. REST API Server
     - Insert, Update, Select 
 3. mySQL
     - Create DB, Insert, Update, Select
-3. Postman
+4. Postman
     - Insert, Update, Select
-
-* https://github.com/dnrwn/postman_response_node
+5. Node js (작업 중)
+   - Postman Response Save
 
 
 포트폴리오 계획서
