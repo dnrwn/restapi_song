@@ -39,23 +39,24 @@ def func_1():
     if request.method == 'GET':
         try:
             val = int(request.values.get('idx'))
-            print(val)
             a = response(1)
-            a['data'] = db.Database.execute(Query.get_select(val))
-
+            a['data'] = db.Database.execute(Query.get_select_one(val))
             return a
+
         except Exception as m:
+            print(traceback.format_exc())
             return response(0, 'Select', c=str(m))
+
     elif request.method == 'POST':
         try:
             val = request.get_json()
-            print(val)
             db.Database.execute(Query.post_update(val))
-            a = db.Database.execute(Query.get_select(int(val['idx'])))
+            a = db.Database.execute(Query.get_select_one(int(val['idx'])))
+            print(a)
             b = response(1)
             b['data'] = a
-
             return a
+
         except Exception as m:
             print(traceback.format_exc())
             return response(0, 'Update', c=str(m))
@@ -67,19 +68,34 @@ def func_2():
     try:
         print(func_2.__name__)
         val = request.get_json()
-        print(val)
         db.Database.execute(Query.post_insert(val))
-        a = db.Database.execute(Query.sql_get)
+        a = db.Database.execute(Query.get_select_all())
         b = response(1)
         b['data'] = a[-1]
-
         return b
+
     except Exception as m:
+        print(traceback.format_exc())
         return response(0, 'Insert', c=str(m))
+
+
+# DB 연동 기능 : Delete
+@app.route('/func_3', methods=['DELETE'])
+def func_3():
+    try:
+        print(func_3.__name__)
+        val = int(request.values.get('idx'))
+        db.Database.execute(Query.delete_delete(val))
+        a = response(1)
+        a['idx'] = val
+        return a
+
+    except Exception as m:
+        print(traceback.format_exc())
+        return response(0, 'Delete', c=str(m))
 
 
 if __name__ == "__main__":
     ip = 'localhost'
     port = 70
     app.run(host=ip, port=port, debug=True)
-

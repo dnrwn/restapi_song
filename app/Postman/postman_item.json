@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "d28b9b54-72ef-429a-9d92-8ae57b1850fc",
-		"name": "New Collection",
+		"name": "testcase",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "12283384"
 	},
@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"input_1\": 1,\r\n    \"input_2\": 2\r\n}",
+					"raw": "{\r\n    \"input_1\": 123456789,\r\n    // \"input_2\": 11.9,\r\n    \"input_2\": \"abcde\",\r\n    \"input_3\": \"abcdeabcde\",\r\n    \"input_4\": true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -35,24 +35,12 @@
 		},
 		{
 			"name": "Update",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"idx\":31,\r\n    \"input_1\":222,\r\n    \"input_2\":30\r\n}",
+					"raw": "{\r\n    \"idx\":31,\r\n    \"input_1\": 1,\r\n    \"input_2\": 2,\r\n    \"input_3\": \"abcde\",\r\n    \"input_4\": \"abcdeabcde\",\r\n    \"input_5\": \"aa\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -60,13 +48,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:70/func_1",
+					"raw": "localhost:70/func_2",
 					"host": [
 						"localhost"
 					],
 					"port": "70",
 					"path": [
-						"func_1"
+						"func_2"
 					]
 				}
 			},
@@ -90,7 +78,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:70/func_1?idx=a",
+					"raw": "localhost:70/func_1?idx=1",
 					"host": [
 						"localhost"
 					],
@@ -101,7 +89,24 @@
 					"query": [
 						{
 							"key": "idx",
-							"value": "a"
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "?idx=3",
+					"query": [
+						{
+							"key": "idx",
+							"value": "3"
 						}
 					]
 				}
@@ -145,8 +150,7 @@
 					"    function (err, res) {\r",
 					"        console.log(res)\r",
 					"    }\r",
-					")\r",
-					""
+					")"
 				]
 			}
 		}

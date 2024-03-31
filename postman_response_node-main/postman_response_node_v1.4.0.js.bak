@@ -42,6 +42,7 @@ function run_server(){
 		}
 		// var date = JSON.stringify(req.header, null, "\t");
 		data_c = req.body // 전달받은 data의 body 값만 변수에 저장
+		console.log(data_c);
 		var find_etc = data_c.case_name.indexOf('etc') // Test Case name이 etc일 경우 	예외처리 (건너뛰기)
 		if (find_etc == -1){ // 
 			var outputFilename = value + '//' + data_c.case_name + "-" + create_date(); // 파일 생성 규칙

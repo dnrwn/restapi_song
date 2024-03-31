@@ -19,12 +19,11 @@ class Database:
             self.cursor = self.db.cursor(pymysql.cursors.DictCursor)
             self.cursor.execute("CREATE DATABASE new_db;")
             q = "CREATE TABLE new_db.item (" \
-                "idx int(255) NOT NULL AUTO_INCREMENT PRIMARY KEY," \
-                "input_1 int(5) DEFAULT NULL," \
-                "input_2 int(2) DEFAULT NULL," \
-                "input_3 varchar(5) DEFAULT NULL," \
-                "input_4 varchar(10) DEFAULT NULL," \
-                "input_5 BOOLEAN DEFAULT NULL,"\
+                "idx int(2) NOT NULL AUTO_INCREMENT PRIMARY KEY," \
+                "input_1 int(2) DEFAULT NULL," \
+                "input_2 varchar(5) DEFAULT NULL," \
+                "input_3 varchar(10) DEFAULT NULL," \
+                "input_4 BOOLEAN DEFAULT NULL,"\
                 "Create_date varchar(255) DEFAULT NULL," \
                 "Update_date varchar(255) DEFAULT NULL);"
             self.cursor.execute(q)
