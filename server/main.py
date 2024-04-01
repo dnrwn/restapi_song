@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 import traceback
 import Query
@@ -32,6 +32,11 @@ def default():
     return a
 
 
+@app.route('/ui')
+def ui():
+    return render_template('test_test.html')
+
+
 # DB 연동 기능 : Select, Update
 @app.route('/func_1', methods=['GET', 'POST'])
 def func_1():
@@ -49,10 +54,15 @@ def func_1():
 
     elif request.method == 'POST':
         try:
-            val = request.get_json()
+            if len(request.form) != 0:
+                val = request.form.to_dict()
+                val['idx'] = int(val['idx'])
+                val['input_1'] = int(val['input_1'])
+                val['input_4'] = int(val['input_4'])
+            else:
+                val = request.get_json()
             db.Database.execute(Query.post_update(val))
             a = db.Database.execute(Query.get_select_one(int(val['idx'])))
-            print(a)
             b = response(1)
             b['data'] = a
             return a
@@ -67,7 +77,13 @@ def func_1():
 def func_2():
     try:
         print(func_2.__name__)
-        val = request.get_json()
+        if len(request.form) != 0:
+            val = request.form.to_dict()
+            val['input_1'] = int(val['input_1'])
+            val['input_4'] = int(val['input_4'])
+        else:
+            val = request.get_json()
+
         db.Database.execute(Query.post_insert(val))
         a = db.Database.execute(Query.get_select_all())
         b = response(1)
@@ -80,11 +96,14 @@ def func_2():
 
 
 # DB 연동 기능 : Delete
-@app.route('/func_3', methods=['DELETE'])
+@app.route('/func_3', methods=['POST', 'DELETE'])
 def func_3():
     try:
         print(func_3.__name__)
-        val = int(request.values.get('idx'))
+        if len(request.form) != 0 and request.method == 'POST':
+            val = int(request.form['idx'])
+        else:
+            val = int(request.values.get('idx'))
         db.Database.execute(Query.delete_delete(val))
         a = response(1)
         a['idx'] = val

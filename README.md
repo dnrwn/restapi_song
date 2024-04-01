@@ -1,3 +1,8 @@
+2024-04-01 업데이트
+- 기존 : main.py 에서 postman evnet 만 대응
+- 변경 : html 파일 추가, main 에서 html request 추가 대응, node 경로 변경
+
+
 2024-03-29 업데이트
 - 기존 : main.py에서 Postman data를 가공해서 Query.py에 전달
   - 전달 값의 [필수, 선택] 성격을 함수 인자로 부여
@@ -5,6 +10,7 @@
   - 필수 > Dict 내 key 값으로 value 호출
   - 선택 > .get 기능을 통해 예외 처리
 
+구조 요약
 1. Postman -> REST API Server -> mySQL -> REST API Server
 2. REST API Server
     - Insert, Update, Select, Delete
@@ -15,15 +21,82 @@
 5. Node js (작업 중)
    - Postman Response Save
 
+
 기능 요구사항
-1. Select
-   - Int
-2. Update
-3. Insert
-4. Delete
+1. Select // Method : GET
+- input
+
+| Parameter | type |Required| Description   |
+|-----------|------|---|---------------|
+| idx       | int  |Mandatory| 조회할 idx 필수 입력 |
+
+- output
+
+| Fild        | Type   | Description                                                                                                                                                                                   |
+|-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Result      | String | - OK </br> - NG </br> - Error </br>                                                                                                                                                           |
+| Description | String | - NG : Insert NG </br> - Error : Null                                                                                                                                                         |
+| Message     | String | - NG : Exception Message                                                                                                                                                                      |
+| Data        | String | - OK : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : int </br> }] |
+
+2. Update // Method : POST
+- input
+
+| Parameter | type    | Required  | Description                   |
+|----|---------|-----------|-------------------------------|
+| idx | int     | Mandatory | 조회할 Idx 필수 입력                 |
+| input_1 | int     | Mandatory | 범위 :   -2147483648 ~ 2147483647 |
+| input_2 | String  | Optional  | 범위 : 5자리 이하                   |
+| input_3 | String  | Optional  | 범위 : 10자리 이하                  |
+| input_4 | Boolean | Optional  | true, false                   |
+
+- output
+
+| Fild        | Type   | Description                                                                                                                                                                                   |
+|-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Result      | String | - OK </br> - NG </br> - Error </br>                                                                                                                                                           |
+| Description | String | - NG : Insert NG </br> - Error : Null                                                                                                                                                         |
+| Message     | String | - NG : Exception Message                                                                                                                                                                      |
+| Data        | String | - OK : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : int </br> }] |
+
+3. Insert // Method : POST
+- input
+
+| Parameter | type    | Required  | Description                   |
+|----|---------|-----------|-------------------------------|
+| input_1 | int     | Mandatory | 범위 :   -2147483648 ~ 2147483647 |
+| input_2 | String  | Optional  | 범위 : 5자리 이하                   |
+| input_3 | String  | Optional  | 범위 : 10자리 이하                  |
+| input_4 | Boolean | Optional  | true, false                   |
+
+- output
+
+| Fild        | Type   | Description                                                                                                                                                                                   |
+|-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Result      | String | - OK </br> - NG </br> - Error </br>                                                                                                                                                           |
+| Description | String | - NG : Insert NG </br> - Error : Null                                                                                                                                                         |
+| Message     | String | - NG : Exception Message                                                                                                                                                                      |
+| Data        | String | - OK : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : int </br> }] |
+
+4. Delete // DELETE
+- input
+
+| Parameter | type |Required| Description   |
+|-----------|------|---|---------------|
+| idx       | int  |Mandatory| 조회할 idx 필수 입력 |
+
+- output
+
+| Fild        | Type   | Description                           |
+|-------------|--------|---------------------------------------|
+| Result      | String | - OK </br> - NG </br> - Error </br>   |
+| Description | String | - NG : Insert NG </br> - Error : Null |
+| Message     | String | - NG : Exception Message              |
+| Data        | String | - OK : idx                            |
 
 
 포트폴리오 계획서
+
 [1] 목표 & 목적
 
 	1. 목표 : Tester 포트폴리오 구성
@@ -41,28 +114,16 @@
 [3] 기능
 
 	1. Server
-		(3-1-a) Server가 App으로 부터 전달 받은 Input data를 query 형태로 변환
+		(3-1-a) Server가 App으로부터 전달받은 Input data를 query 형태로 변환
         (3-1-b) Server가 query 형태의 Message를 DB에 전달
         (3-1-c) Server가 실행 결과를 App에 전달
 	2. DB
         (3-2-a) DB가 전달 받은 Message를 실행
     3. App
         (3-3-a) App에서 기능 선택 및 입력한 Input data 값을 Server로 전달
-        (3-3-b) App이 전달 받은 실행 결과를 출력
-	
-[4] 전체 시나리오
+        (3-3-b) App이 Server로부터 전달받은 실행 결과를 출력
 
-	1. 값 입력
-	2. DB에 저장된 data 조회
-		(4-2-a) 전체 data
-		(4-2-b) 특정 index / input / output
-		(4-2-c) index 범위 / (삭제)
-	3. DB에 저장된 data 삭제
-		(4-3-a) 전체 data
-		(4-3-b) 특정 index / input / output
-		(4-3-c) index 범위 / (삭제)
-	
-[5] 테스트 방법
+[4] 테스트 방법
 
 	1. App에서 직접 Test
 	2. postman을 이용하여 App 기능 Test 자동화
@@ -81,14 +142,13 @@
 			- TC 반복 실행
 	5. selenium 캡처 기능으로 기능 실행 전, 후 상태 이미지로 
 
-[6] 출처 & 참조
+[5] 출처 & 참조
 
 	1. 이용 언어
 		(6-1-a) python
 		(6-1-b) http
 		(6-1-c) javascript
-		(6-1-d) css
-		(6-1-e) mysql 제어문
+		(6-1-d) mysql 제어문
 	2. open source 
 		(6-2-a) Flask
 		(6-2-b) pytest
@@ -110,7 +170,7 @@
 		- 디렉토리 유무 체크 후 생성 : https://devpouch.tistory.com/139
 		- Selenium 캡쳐 : https://cozynow.tistory.com/41
 
-[7] 사용법
+[6] 사용법
 
 	1. Server 구동
 		(7-1-a) main.py 실행
@@ -118,7 +178,7 @@
 		(7-2-a) Server : server/main.py
 		(7-2-b) Selenium : app/Selenium/postman_test_selenium.py
 		(7-2-c) Postman :  app/postman/postman_item.josn
-		(7-2-d) html : html/test_test.html
+		(7-2-d) html : server/templates/test_test.html
         (7-2-e) Node : postman_response_node/ postman_response_node_v1.4.0
 	3. Selenium 실행
 		(7-3-a) terminal에서 app/selenium 디렉토리 진입

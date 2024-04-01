@@ -8,7 +8,7 @@
 4. Node JS Server = 전달 받은 Data 가공
 5. Node JS Server = 가공된 Data 저장
 
-자료1. Postman > Test에 작성
+자료1. Postman > Test 에 작성
 - postman_test_script.js
 
 자료2. Node js 로 실행
