@@ -1,6 +1,6 @@
 2024-04-01 업데이트
 - 기존 : main.py 에서 postman evnet 만 대응
-- 변경 : html 파일 추가, main 에서 html request 추가 대응, node 경로 변경
+- 변경 : html 파일 추가, main 에서 html request 추가 대응, node 경로 변경, main README.md 수정
 
 
 2024-03-29 업데이트
