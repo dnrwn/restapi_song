@@ -1,3 +1,8 @@
+해야할 일
+- 첫 열로 얻은 값을 key로 지정하고 두 번째 열부터 얻은 각 행의 data와 같이 json 형태로 가공
+- 가공된 data를 server api로 push 하는 동작 추가
+
+
 version : 0.3, date : 2024-03-30
 - main -> file_read 파일명 변경
 - event -> GET, POST in/out Event 생성 (Postman 대응)
