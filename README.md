@@ -189,7 +189,7 @@
         (7-2-e) Node : postman_response_node/ postman_response_node_v1.4.0
 	3. Selenium 실행
 		(7-3-a) terminal에서 app/selenium 디렉토리 진입
-		(7-3-b) pytest selenium_script.py --html=[filename].html --self-contained-html 입력 후 실행
+		(7-3-b) pytest selenium_script.py > 5.console_log/log.log 입력 후 실행
         (7-3-c) 이미지 저장 경로 : ../selenium/{test 시작 시간}/insert(or update, select, delete)/..in(or out).png
 	4. Postman 실행
 		(7-4-a) app/postman/postman_item.josn 파일을 Postman Tool에서 import

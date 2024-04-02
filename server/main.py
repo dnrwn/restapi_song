@@ -28,7 +28,10 @@ def response(a, b=None, c=None):
 
 @app.route('/', methods=['GET'])
 def default():
-    a = 'http://%s:%s/func_1 or func_2' % (ip, port)
+    a = (f'<p><a href="http://{ip}:{port}/func_1" methods="POST"> Select Update </a></p>'
+         f'<p><a href="http://{ip}:{port}/func_2" methods="GET"> Insert </a></p> '
+         f'<p><a href="http://{ip}:{port}/func_3" methods="POST"> Delete </a></p> '
+         f'<p><a href="http://{ip}:{port}/ui" > web app </a></p>')
     return a
 
 

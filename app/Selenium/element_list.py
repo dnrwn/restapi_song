@@ -31,7 +31,8 @@ ui = {
         'category': '/html/body/div/ul/li[4]',
         'idx': '//*[@id="tab-4"]/form/p[1]/input',
         'submit': '//*[@id="tab-4"]/form/p[2]/input'
-    }
+    },
+    'result': '/html/body/div[3]/div[2]/div[2]/div[2]/span[2]'
 }
 
 

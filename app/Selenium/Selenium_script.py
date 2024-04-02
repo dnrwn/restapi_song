@@ -7,56 +7,61 @@ import time
 LOGGER = logging.getLogger(__name__)
 
 ########## data ##########
-# 공통 input value
-input_value = [2, 'a', '*', '', 1.002]
-value_option = 1
-range_1 = 5
-start_time = datetime.datetime.now().strftime('%Y%m%d_%H%M')
-
-########## 구동 ##########
-os.mkdir(str(start_time))
-
+# Common
+start_time = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+dir_mk = str('4.screencapture' + '/' + start_time)
 # driver service
 service = webdriver.EdgeService(executable_path=element_list.driver_path)
 
+
 # driver option
-option = webdriver.EdgeOptions()
-# option.add_experimental_option("detach", True)  # browser show
-option.add_argument('headless')  # browser hide
-option.add_argument('disable-gpu')  # # browser hide
+def gui_op(a):
+    option = webdriver.EdgeOptions()
+    if a == 'hide':
+        option.add_argument('headless')  # browser hide
+        option.add_argument('disable-gpu')  # # browser hide
+    elif a == 'show':
+        option.add_experimental_option("detach", True)  # browser show
+
+    return option
+
 
 # driver run
-driver = webdriver.Edge(service=service, options=option)
-# driver.get(element_list.url)
-
-# print(element_list.ui['insert']['category'])
+driver = webdriver.Edge(service=service, options=gui_op('hide'))
 
 
 def ui_click(a):
     try:
         driver.find_element(By.XPATH, value=a).click()
-        return 'PASS'
+        return LOGGER.info('PASS')
     except:
-        return 'FAIL'
+        return LOGGER.info('FAIL')
 
 
 def ui_input(a, b):
     try:
         driver.find_element(By.XPATH, value=a).send_keys(b)
-        return 'PASS'
+        return LOGGER.info('PASS')
     except:
-        return 'FAIL'
+        return LOGGER.info('FAIL')
+
+
+def ui_result(a):
+    try:
+        LOGGER.info('PASS')
+        return driver.find_element(By.XPATH, value=a).text
+    except:
+        return LOGGER.info('FAIL')
 
 
 def capture_in(type_1='', item_1='', item_2='', item_3='', item_4='', item_5=''):
-
-    tt = str(start_time) + '/' + type_1 + '/'
+    tt = dir_mk + '/' + type_1 + '/'
     Path(tt).mkdir(parents=True, exist_ok=True)
     driver.save_screenshot(tt + str(item_1) + '_' + str(item_2) + '_' + str(item_3) + '_' + str(item_4) + '_' + str(item_5) + '_' + '_in.png')
 
 
 def capture_out(type_1='', item_1='', item_2='', item_3='', item_4='', item_5=''):
-    tt = str(start_time) + '/' + type_1 + '/'
+    tt = dir_mk + '/' + type_1 + '/'
     driver.save_screenshot(tt + str(item_1) + '_' + str(item_2) + '_' + str(item_3) + '_' + str(item_4) + '_' + str(item_5) + '_' + '_out.png')
 
 
@@ -76,6 +81,7 @@ def test_insert_valid():
                     ui_click(element_list.ui['insert']['submit'])
                     time.sleep(0.3)
                     capture_out('insert_valid', item_int, item_str5, item_str10, item_boolean)
+                    assert ui_result(element_list.ui['result']) == '"OK"', LOGGER.info('FAIL')
 
 
 @pytest.mark.repeat(1)
@@ -94,6 +100,7 @@ def test_insert_invalid():
                     ui_click(element_list.ui['insert']['submit'])
                     time.sleep(0.3)
                     capture_out('insert_invalid', item_int, item_str5, item_str10, item_boolean)
+                    assert ui_result(element_list.ui['result']) == '"insert NG"'
 
 
 @pytest.mark.repeat(1)
@@ -106,6 +113,7 @@ def test_select_valid():
         ui_click(element_list.ui['select']['submit'])
         time.sleep(0.3)
         capture_out('select_valid', item_int)
+        assert ui_result(element_list.ui['result']) == '"OK"'
 
 
 @pytest.mark.repeat(1)
@@ -118,6 +126,7 @@ def test_select_invalid():
         ui_click(element_list.ui['select']['submit'])
         time.sleep(0.3)
         capture_out('select_invalid', item_int)
+        assert ui_result(element_list.ui['result']) == '"select NG"'
 
 
 @pytest.mark.repeat(1)
@@ -138,6 +147,7 @@ def test_update_valid():
                         ui_click(element_list.ui['update']['submit'])
                         time.sleep(0.3)
                         capture_out('update_valid', item_int, item_int_1, item_str5, item_str10, item_boolean)
+                        assert ui_result(element_list.ui['result']) == '"OK"'
 
 
 @pytest.mark.repeat(1)
@@ -158,6 +168,7 @@ def test_update_invalid():
                         ui_click(element_list.ui['update']['submit'])
                         time.sleep(0.3)
                         capture_out('update_invalid', item_int, item_int_1, item_str5, item_str10, item_boolean)
+                        assert ui_result(element_list.ui['result']) == '"update NG"'
 
 
 @pytest.mark.repeat(1)
@@ -170,6 +181,7 @@ def test_delete_valid():
         ui_click(element_list.ui['delete']['submit'])
         time.sleep(0.3)
         capture_out('delete_valid', item_int)
+        assert ui_result(element_list.ui['result']) == '"OK"'
 
 
 # Type invalid
@@ -183,6 +195,7 @@ def test_delete_invalid():
         ui_click(element_list.ui['delete']['submit'])
         time.sleep(0.3)
         capture_out('delete_invalid', item_int)
+        assert ui_result(element_list.ui['result']) == '"delete NG"'
 
 
 # idx null
@@ -196,3 +209,4 @@ def test_delete_invalid_null():
         ui_click(element_list.ui['delete']['submit'])
         time.sleep(0.3)
         capture_out('delete_invalid_null', item_int)
+        assert ui_result(element_list.ui['result']) == '"delete NG"'
