@@ -50,11 +50,13 @@ input_value_valid = {
     },
     'str5': {
         0: 'a',
-        1: 'ABCDE'
+        1: 'ABCDE',
+        2: ''
     },
     'str10': {
         0: 'a',
-        1: 'ABCDEFGHIJ'
+        1: 'ABCDEFGHIJ',
+        2: ''
     },
     'boolean': {
         0: 1,
@@ -68,12 +70,10 @@ input_value_invalid = {
         2: ''
     },
     'str5': {
-        0: 'aaaaaa',
-        1: ''
+        0: 'aaaaaa'
     },
     'str10': {
-        0: 'aaaaaaaaaaa',
-        1: ''
+        0: 'aaaaaaaaaaa'
     },
     'boolean': {
         0: 2,

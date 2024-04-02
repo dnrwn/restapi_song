@@ -1,7 +1,9 @@
-해야할 일
-- 첫 열로 얻은 값을 key로 지정하고 두 번째 열부터 얻은 각 행의 data와 같이 json 형태로 가공
-- 가공된 data를 server api로 push 하는 동작 추가
-
+version : 0.4, date : 2024-04-03
+- 주요 변경 사항
+  - 기존 : 각 Cell 의 값을 동적 변수에 삽입하는 부분에서 중단
+  - 변경 : 각 Cell 의 값을 동적 변수에 삽입하고 dict 변수에 추가
+- event.py 추가
+  - 역할 : file_read.py 에서 dict 변수에 추가된 각 Cell 의 Value 를 이용해서 API 에 접근
 
 version : 0.3, date : 2024-03-30
 - main -> file_read 파일명 변경

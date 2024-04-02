@@ -1,11 +1,6 @@
 import openpyxl
 import tkinter.filedialog
 import os
-import datetime
-
-
-def time():
-    return datetime.datetime.now().strftime('%y%m%d_%H%M%S')
 
 
 # 동일 디렉토리에 있는 xlsx 파일 중 첫 번째 파일 선택
@@ -37,40 +32,51 @@ def file_read():
 #         sheet = file_read()[sheet_nm]
 
 
-def func_connect():
-    file = file_read()
-    file_sheet = file['TC']
+class FUNC:
+    def __init__(self):
+        self.file = file_read()
+        self.file_sheet = self.file['TC']
+        self.case_item = {}
+        self.case_result = {}
+        self.tc_count = FUNC.col_count(self)
 
-    # 첫 열 값 추출
-    i = 1  # 행
-    for row_data in file_sheet.iter_rows(min_col=2, max_row=1):
-        for item in row_data:
-            if item.value is not None:
-                globals()[f'item_{i}'] = item.value
-                # print(globals()[f'item_{i}'])
-            i += 1
+    # row : 행, col : 열
+    # TC 총 개수 (A열 개수)
+    def col_count(self):
+        for col_data in self.file_sheet.iter_cols(max_col=1, min_row=1):
+            return len(col_data)
 
-    # 첫 열 제외 값 추출
-    z = 1  # 행
-    print('#########################################')
-    for row_data in file_sheet.iter_rows(min_row=2, min_col=2):  # row 열, col 행
-        print('for 1')
-        y = 1  # 열
-        x = 1  # 첫 열 값
-        for cell in row_data:
-            globals()[f'postman_{y}'] = {}
-            if cell.value is not None:
-                globals()[f'cell_{z}_{y}'] = cell.value  # 동적 변수 생성 및 값 삽입
-                globals()[f'postman_{y}'][globals()[f'item_{x}']] = globals()[f'cell_{z}_{y}']
-                y += 1
-            x += 1
-        z += 1
+    def input_add_json(self):
+        i = 1
+        j = 1
+        for col_data in self.file_sheet.iter_rows(min_col=2, min_row=2, max_col=12, max_row=self.tc_count):
+            for item_v in col_data:
+                if item_v.value is None:
+                    globals()[f'em_{i}'] = ''
+                elif item_v.value is not None:
+                    globals()[f'em_{i}'] = item_v.value
+                # print(f'em_{i} : ', globals()[f'em_{i}'])
+                # print('end')
 
-    # file_name = f'TC_result_{time()}.xlsx'
-    # file.save(file_name)  # file Save 동작은 for문 밖으로 실행해야 함 (for 문 안에서 할 경우 여러 파일 생성됨)
-    file.close()
-    # print('작성 완료\nFile Name : ', file_name)
-
-
-if __name__ == '__main__':
-    func_connect()
+                if i % 11 == 0:
+                    self.case_item[f'case_{j}'] = {
+                        'function_name': globals()[f'em_{i - 10}'],
+                        'number': globals()[f'em_{i - 9}'],
+                        'idx': globals()[f'em_{i - 6}'],
+                        'input_1': globals()[f'em_{i - 5}'],
+                        'input_2': globals()[f'em_{i - 4}'],
+                        'input_3': globals()[f'em_{i - 3}'],
+                        'input_4': globals()[f'em_{i - 2}']
+                    }
+                    self.case_result[f'case_{j}'] = {
+                        "function_name": globals()[f'em_{i - 10}'],
+                        "number": globals()[f'em_{i - 9}'],
+                        "Expected_result": globals()[f'em_{i - 1}'],
+                        "Actual_result": globals()[f'em_{i - 0}']
+                    }
+                i += 1
+            j += 1
+        return {
+            'item': self.case_item,
+            'result': self.case_result
+        }
