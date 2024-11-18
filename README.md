@@ -25,7 +25,7 @@
     - Create DB, Insert, Update, Select, Delete
 4. Postman
     - Insert, Update, Select, Delete
-5. Node js (작업 중)
+5. Node js
    - Postman Response Save
 
 ########################################
