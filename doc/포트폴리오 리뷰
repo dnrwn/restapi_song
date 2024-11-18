@@ -1,0 +1,60 @@
+(작성 중)
+
+0. 포트폴리오 설명
+담당했던 프로젝트들에서 터득했었던 테스트 자동화 스킬을 포트폴리오 작성을 위해 구성함
+
+1. 사용 기술
+- Selenium(pytest), python(pytest), postman(nodejs)
+
+2. 자동화 운영 프로젝트
+a. python(pytest) : 펫 케어 API 검증
+	- 기존 담당자의 지원 요청으로 API 검증 업무 Test Leader 임시 담당
+	- python script로 API의 input/output 테스트를 자동화
+	- API 연동 이슈는 개발팀 지원을 받아서 해결
+	- 구축 일정 : 20일 
+		- 5일간 TC 설계/작성 및 script sample 작성 후 팀원들에게 공유 후 업무 분배
+		- 10일간 script 작성 완료
+		- 5일간 script 수행 결과 검토 및 script 유지보수
+	- 미리 계획된 타 프로젝트 참가로 인해 인계 후 종료
+
+b. python(pytest) : 테스트 자동화 Framework 검증
+	- 매뉴얼로 테스트 진행 후 안정화된 이후에 자동화
+	- python으로 구현된 Framework의 각 함수와 인자 값을 python script로 테스트 자동화
+	- 구축 일정 : 10일
+		- 10일간 script 작성 완료
+	- 프로젝트 종료 전 LG전자 팀장 라인 데모 시연을 위해 데모 시나리오 작성 후 SE에게 인계
+
+c. postman(nodejs) : 원격의료 솔루션 API 검증
+	- 프로젝트 제약(H/W 상태 변경 등)의 사유로 완전 자동화 환경 구성 불가 (물리적으로 분리된 H/W(셋톱박스)와 API Server간 통합 테스트)
+	- 일부 자동화에 만족하지 않고 테스트 결과를 원하는 형태로 기록하는 nodejs server를 구축하여 테스트 수행 기간 단축에 활용
+	- 구축 일정 : 15일
+		- 5일간 TC 설계/작성
+		- 5일간 Postman의 Collections만 이용하여 Case 작성
+
+d. selenium(pytest) : 원격의료 솔루션 UI 검증
+	- 프로젝트 일정상 sanity test를 목적으로 주요 기능 일부를 선별하여 작성
+	- 구축 일정 : 5일
+		- 2일간 자동화 타겟 기능 선별 및 협의
+		- 3일간 script 작성
+
+3. 자동화 역량 공유
+a. Selenium(pytest) : 개인 과제 (역량 향상, 기술 소개)
+	- 담당 프로젝트(호텔 객실 플랫폼)의 UI 테스트 자동화 Script 작성 
+	- 초기에는 전체 시나리오로 작성하는 것을 목표로 하였으나 UI 테스트 자동화 환경을 처음 구성한 사정, 방대한 element로 인해 전체 시나리오를 작성하는 것은 일정에 무리가 있다고 판단하여 일정에 맞는 범위로 축소
+	- 범위 : 로그인 및 Lable(팝업 문구 등)
+	- 자동화 구축 일정 : 5일
+
+b. Appium : 사내 교육
+	- 연구원 ~ 선임연구원 대상으로 테스트 자동화 경험 공유
+	- 임의 Mobile App (하이브리드 앱)을 타겟으로 자동화 TC 설계/작성 법 교육
+	- Appium Script 작성법 공유
+
+3. 테스트 자동화 구조
+a. DB의 DML (데이터 조작어) interface를 간단하게 rest api server를 임의로 구성하였고
+b. html로 해당 api와 통신할 수 있는 간단한 ui를 만들었고
+c. postman을 통해 api test하는 script와
+d. selenium을 통해 ui를 test하는 script가 작성되어 있습니다.
+e. pytest를 이용해서 selenium script를 실행해서 결과를 return하게 해놓았고
+- pytest 별도 결과 파일
+f. nodejs를 이용해서 postman 실행 결과를 return하게 해놓았습니다.
+- postman console log를 json 파일로 가공
