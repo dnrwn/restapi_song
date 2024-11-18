@@ -1,4 +1,6 @@
-(작성 중)
+노타
+씨드로닉스
+
 
 0. 포트폴리오 설명
 담당했던 프로젝트들에서 터득했었던 테스트 자동화 스킬을 포트폴리오 작성을 위해 구성함
@@ -58,3 +60,5 @@ e. pytest를 이용해서 selenium script를 실행해서 결과를 return하게
 - pytest 별도 결과 파일
 f. nodejs를 이용해서 postman 실행 결과를 return하게 해놓았습니다.
 - postman console log를 json 파일로 가공
+
+g. excel 문서를 통해 테스트 자동화 script 공부 중 (excel_read)
