@@ -1,52 +1,47 @@
 import openpyxl
 import tkinter.filedialog
-import os
+import os, json
 
-
-# 동일 디렉토리에 있는 xlsx 파일 중 첫 번째 파일 선택
-def ex_search_1():
-    file = os.listdir(os.getcwd())
-    return [s for s in file if '.xlsx' in s][0]
-
-
-# 탐색기로 파일 선택
-def ex_search_2():
-    return tkinter.filedialog.askopenfilename(initialdir='', title='한 개의 파일 선택')
+import selenium.webdriver.common.devtools.v129.dom
 
 
 # file read
-def file_read():
+def file_read(a='1'):
     # a = input('1 : 자동 실행, 2 : 직접 선택\n')
-    a = '1'
-    if a == '1':
-        return openpyxl.load_workbook(ex_search_1())
-    elif a == '2':
-        return openpyxl.load_workbook(ex_search_2())
+    if a == '1':  # 동일 디렉토리에 있는 xlsx 파일 중 첫 번째 파일 선택
+        file = os.listdir(os.getcwd())
+        return openpyxl.load_workbook([s for s in file if '.xlsx' in s][0])
+    elif a == '2':  # 탐색기로 파일 선택
+        ################## TBD ##################
+        return openpyxl.load_workbook(tkinter.filedialog.askopenfilename(initialdir='', title='한 개의 파일 선택'))
     else:
         return print('잘못된 선택')
 
 
-# def file_read_2():
-#     # 여러 sheet를 읽을 경우
-#     for sheet_nm in file_read().sheetnames:
-#         sheet = file_read()[sheet_nm]
+def sheet_read(a='1'):
+    if a == '1':  # 특정 sheet를 읽을 경우
+        return 'TC'
+    else:   # 여러 sheet를 읽을 경우
+        ################## TBD ##################
+        for sheet_nm in file_read().sheetnames:
+            sheet = file_read()[sheet_nm]
+        return None
 
 
 class FUNC:
     def __init__(self):
         self.file = file_read()
-        self.file_sheet = self.file['TC']
+        self.file_sheet = self.file[sheet_read()]
         self.case_item = {}
         self.case_result = {}
         self.tc_count = FUNC.col_count(self)
 
     # row : 행, col : 열
-    # TC 총 개수 (A열 개수)
-    def col_count(self):
+    def col_count(self):  # TC 총 개수 (A열 개수)
         for col_data in self.file_sheet.iter_cols(max_col=1, min_row=1):
             return len(col_data)
 
-    def input_add_json(self):
+    def test_item_array(self):
         i = 1
         j = 1
         for col_data in self.file_sheet.iter_rows(min_col=2, min_row=2, max_col=12, max_row=self.tc_count):
@@ -59,16 +54,16 @@ class FUNC:
                 # print('end')
 
                 if i % 11 == 0:
-                    self.case_item[f'case_{j}'] = {
-                        'function_name': globals()[f'em_{i - 10}'],
-                        'number': globals()[f'em_{i - 9}'],
-                        'idx': globals()[f'em_{i - 6}'],
-                        'input_1': globals()[f'em_{i - 5}'],
-                        'input_2': globals()[f'em_{i - 4}'],
-                        'input_3': globals()[f'em_{i - 3}'],
-                        'input_4': globals()[f'em_{i - 2}']
+                    self.case_item[f"case_{j}"] = {
+                        "function_name": globals()[f'em_{i - 10}'],
+                        "number": globals()[f'em_{i - 9}'],
+                        "idx": globals()[f'em_{i - 6}'],
+                        "input_1": globals()[f'em_{i - 5}'],
+                        "input_2": globals()[f'em_{i - 4}'],
+                        "input_3": globals()[f'em_{i - 3}'],
+                        "input_4": globals()[f'em_{i - 2}']
                     }
-                    self.case_result[f'case_{j}'] = {
+                    self.case_result[f"case_{j}"] = {
                         "function_name": globals()[f'em_{i - 10}'],
                         "number": globals()[f'em_{i - 9}'],
                         "Expected_result": globals()[f'em_{i - 1}'],
@@ -76,7 +71,13 @@ class FUNC:
                     }
                 i += 1
             j += 1
-        return {
-            'item': self.case_item,
-            'result': self.case_result
-        }
+        return json.dumps({
+            "item": self.case_item,
+            "result": self.case_result
+        })
+    def result_write(self):
+        pass
+
+if __name__ == "__main__":
+    run = FUNC()
+    print(type(run.test_item_array()))

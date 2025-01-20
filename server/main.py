@@ -64,6 +64,7 @@ def func_1():
                 val['input_4'] = int(val['input_4'])
             else:
                 val = request.get_json()
+            db.Database.execute(Query.get_select_one(int(val['idx'])))
             db.Database.execute(Query.post_update(val))
             a = db.Database.execute(Query.get_select_one(int(val['idx'])))
             b = response(1)
@@ -71,9 +72,9 @@ def func_1():
             return a
 
         except Exception as m:
+            print('main exception')
             print(traceback.format_exc())
             return response(0, 'Update', c=str(m))
-
 
 # DB 연동 기능 : insert
 @app.route('/func_2', methods=['POST'])

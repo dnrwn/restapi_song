@@ -64,7 +64,7 @@ function run_server(){
 if (module_check() == 1){
 	if (value == undefined){
 		console.log('===========================================');
-		console.log('옵션 입력 필요 (옵션 값은 디렉토리 생성에 사용됩니다.)\nServer를 다시 시작해 주세요.\nex) cmd: node [node server file].js -[str]');
+		console.log('옵션 입력 필요 (옵션 값은 디렉토리 생성에 사용됩니다.)\nServer를 다시 시작해 주세요.\nex) cmd: node [node server file].js [str]');
 		console.log('===========================================');
 	}
 	else if (value != undefined){

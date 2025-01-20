@@ -22,9 +22,8 @@ version : 0.2.1, date : 2023-09-07
 
 1. 구성
 - TC.xlsx : TC 예시 문서
-- main.py : TC 문서 data를 동적 변수에 삽입, 삽입된 변수를 py_tc.py 의 함수에 전달, py_tc.py의 return 값을 TC 문서에 기록
-- py_tc.py : main.py를 통해 TC 문서에서 얻은 data를 func.py로 전달, func.py의 return 값을 main.py로 전달
-- func.py : 임시 기능부
+- file_read.py : TC 문서 data를 동적 변수에 삽입, 삽입된 변수를 py_tc.py 의 함수에 전달, py_tc.py의 return 값을 TC 문서에 기록
+- event.py : Test 실행 부분
 
 2. Test Case (TC.xlsx) : 엑셀 파일의 행을 기준으로 아래의 Test item 작성
 - Function name
@@ -36,11 +35,11 @@ version : 0.2.1, date : 2023-09-07
 - Parameter
 - Expected Result
 
-3. Main 로직 (main.py) : TC.xlsx의 Item 을 읽고 동적 변수에 삽입
+3. Main 로직 (file_read.py) : TC.xlsx의 Item 을 읽고 동적 변수에 삽입
 - Function Name : py_tc.py의 함수명을 호출하기 위해 삽입
 - Parameter : py_tc.py의 인자로 삽입하기 위해 삽입
 
-4. Test Case (py_tc.py) : main으로부터 전달받은 data를 func.py에 전달
+4. Test Case 로직 (event.py) : 
 
 [comment]: <> (- 동적 변수를 통해 얻은 valid, invalid 값으로 result 를 분개한다. &#40;if 문, try 문&#41;)
 - 동적 변수를 통해 얻은 parameter 를 func.py에 전달(다중 인자 활용 업데이트 필요)
@@ -49,7 +48,7 @@ version : 0.2.1, date : 2023-09-07
 5. Test Case 수행 결과 (TC.xlsx)
 - 엑셀 파일의 result 열에 수행 결과 입력 후 새로운 파일로 저장한다.
 
-※ main.py와 main_2.py 차이 : 파일 선택, 읽기, 쓰기 등 각 기능 모듈화 계획이 main, 초기 계획이 main_2 
+※ file_read.py와 etc_main.py 차이 : 파일 선택, 읽기, 쓰기 등 각 기능 모듈화 계획이 file_read, 초기 계획이 etc_main 
 
 ================
 5. 2차 계획

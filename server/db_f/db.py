@@ -33,7 +33,11 @@ class Database:
             args = {}
         self.cursor.execute(query, args)
         row = self.cursor.fetchall()
-        self.db.commit()
+        if query.find('SELECT') == 0:
+            if len(row) == 0:
+                raise ValueError('Index not found')
+            else:
+                self.db.commit()
         return row
 
 
