@@ -1,9 +1,12 @@
+예정
+1. actual_result 삽입 함수 추가 중 (file_read.py)
+2. nodejs server를 windows 서비스에 등록하는 script 작성 (bat)
+
 2025-01-20 업데이트
 1. idx가 없을 경우 예외처리 추가 (db.py)
 2. excel read 값을 json type으로 변환하도록 수정
 3. case_run 함수 최적화 (event.py)
 - 기능을 dict 형태 data로 저장하고 for문을 통해 간략화
-4. actual_result 삽입 함수 추가 중 (file_read.py)
 
 2024-04-02 업데이트
 - Selenium Script 초안 작성 완료
