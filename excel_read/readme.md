@@ -1,4 +1,16 @@
-version : 0.4, date : 2024-04-03
+예정
+- actual_result 삽입 함수 추가 중 (file_read.py)
+- TC 문서에 test_data 항목 추가 예정 (file_read.py 부분 적용 예정)
+
+version : 0.5, date : 2025-01-20
+- 주요 변경 사항 
+  - actual_result, record를 cell 값이 아닌 cell 위치로 저장
+  - write 함수 초기 설계 완료
+    - excel write, save 부분 추가 후 완료 예정
+  - excel read 값을 json type으로 변환하도록 수정
+  - case_run 함수 최적화 (event.py)
+  - 기능을 dict 형태 data로 저장하고 for문을 통해 간략화
+
 - 주요 변경 사항
   - 기존 : 각 Cell 의 값을 동적 변수에 삽입하는 부분에서 중단
   - 변경 : 각 Cell 의 값을 동적 변수에 삽입하고 dict 변수에 추가
