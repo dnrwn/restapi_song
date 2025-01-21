@@ -1,6 +1,11 @@
 예정
-- actual_result 삽입 함수 추가 중 (file_read.py)
-- TC 문서에 test_data 항목 추가 예정 (file_read.py 부분 적용 예정)
+- file_read.py : file_read, sheet_read 함수 정리할 필요가 있을지 검토
+- event.py : function_name, method, url 정보 관리 위치 검토 필요
+
+version : 0.6, date : 2025-01-21
+- file_write 함수 작성 완료 (file_read.py)
+- TC 문서에 test_data 항목 추가 예정 (file_read)
+  - test date 정보는 file 명으로 관리 하기로 결정 (적용 X)
 
 version : 0.5, date : 2025-01-20
 - 주요 변경 사항 
