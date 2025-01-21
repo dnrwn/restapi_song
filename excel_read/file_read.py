@@ -3,6 +3,8 @@ import tkinter.filedialog
 import os, json
 
 import selenium.webdriver.common.devtools.v129.dom
+from cffi.model import global_lock
+from selenium.webdriver.common.devtools.v85.runtime import global_lexical_scope_names
 
 
 # file read
@@ -34,49 +36,47 @@ class FUNC:
         self.file_sheet = self.file[sheet_read()]
         self.case_item = {}
         self.case_result = {}
-        self.tc_count = FUNC.col_count(self)
-
-    # row : 행, col : 열
-    def col_count(self):  # TC 총 개수 (A열 개수)
-        for col_data in self.file_sheet.iter_cols(max_col=1, min_row=1):
-            return len(col_data)
 
     def test_item_array(self):
-        i = 1
+        i = 1  # 열
         j = 1
-        for col_data in self.file_sheet.iter_rows(min_col=2, min_row=2, max_col=12, max_row=self.tc_count):
+        for col_data in self.file_sheet.iter_rows(min_col=1, min_row=2, max_col=self.file_sheet.max_column,
+                                                  max_row=self.file_sheet.max_row):
             for item_v in col_data:
-                if item_v.value is None:
-                    globals()[f'em_{i}'] = ''
-                elif item_v.value is not None:
-                    globals()[f'em_{i}'] = item_v.value
-                # print(f'em_{i} : ', globals()[f'em_{i}'])
-                # print('end')
+                if (i + (1*j)) % self.file_sheet.max_column == 0 or i % self.file_sheet.max_column == 0:
+                    globals()[f'em_{i}'] = item_v.coordinate
+                else:
+                    globals()[f'em_{i}'] = '' if item_v.value is None else item_v.value
 
-                if i % 11 == 0:
-                    self.case_item[f"case_{j}"] = {
-                        "function_name": globals()[f'em_{i - 10}'],
-                        "number": globals()[f'em_{i - 9}'],
-                        "idx": globals()[f'em_{i - 6}'],
-                        "input_1": globals()[f'em_{i - 5}'],
-                        "input_2": globals()[f'em_{i - 4}'],
-                        "input_3": globals()[f'em_{i - 3}'],
-                        "input_4": globals()[f'em_{i - 2}']
+                if i % self.file_sheet.max_column == 0:  # 행의 모든 열을 변수에 삽입 후 진입
+                    z = i - (self.file_sheet.max_column - 1)  # 두 번째 행(row) 부터 읽기 때문에 -1 추가
+                    self.case_item[globals()[f"em_{z + 0}"]] = {
+                        "function_name": globals()[f'em_{z + 1}'],
+                        "number": globals()[f'em_{z + 2}'],
+                        "idx": globals()[f'em_{z + 3}'],
+                        "input_1": globals()[f'em_{z + 6}'],
+                        "input_2": globals()[f'em_{z + 7}'],
+                        "input_3": globals()[f'em_{z + 8}'],
+                        "input_4": globals()[f'em_{z + 9}']
                     }
-                    self.case_result[f"case_{j}"] = {
-                        "function_name": globals()[f'em_{i - 10}'],
-                        "number": globals()[f'em_{i - 9}'],
-                        "Expected_result": globals()[f'em_{i - 1}'],
-                        "Actual_result": globals()[f'em_{i - 0}']
+                    self.case_result[globals()[f"em_{z + 0}"]] = {
+                        "function_name": globals()[f'em_{z + 1}'],
+                        "number": globals()[f'em_{z + 2}'],
+                        "Expected_result": globals()[f'em_{z + 10}'],
+                        "Actual_result": globals()[f'em_{z + 11}'],  # 결과 기록 위치 저장
+                        "record": globals()[f'em_{z + 12}']  # 결과 기록 위치 저장
                     }
                 i += 1
-            j += 1
         return json.dumps({
             "item": self.case_item,
             "result": self.case_result
         })
-    def result_write(self):
-        pass
+
+    def test_result_write(self, result_cell, record_cell, result, record=None):
+        print('1', result_cell)
+        print('2', record_cell)
+        print('3', result)
+        print('4', type(record))
 
 if __name__ == "__main__":
     run = FUNC()

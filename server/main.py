@@ -17,7 +17,7 @@ def response(a, b=None, c=None):
         }
     elif a == 1:
         return {
-            "Result": "OK"
+            "Result": "PASS"
         }
     else:
         return {
