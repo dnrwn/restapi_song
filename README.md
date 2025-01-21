@@ -4,6 +4,7 @@
 - 포트폴리오 리뷰.pdf 파일 정리
 - excel_read, rest api server, 자동화 스크립트를 분리할지 검토
 - pytest init.py 파일 위치 정리 필요
+- mysql 서비스 시작 script 작성 (bat)
 
 2025-01-20 업데이트 
 - idx가 없을 경우 예외처리 추가 (db.py)
