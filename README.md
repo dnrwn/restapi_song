@@ -2,6 +2,7 @@
 - nodejs server를 windows 서비스에 등록하는 script 작성 (bat)
 - README 파일 정리 검토 (통합 or 필요 없는 부분 삭제)
 - 포트폴리오 리뷰.pdf 파일 정리
+- excel_read, rest api server, 자동화 스크립트를 분리할지 검토
 
 2025-01-20 업데이트 
 - idx가 없을 경우 예외처리 추가 (db.py)
