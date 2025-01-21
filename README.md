@@ -27,7 +27,8 @@
 
 ########################################
 구조 요약
-1. Postman -> REST API Server -> mySQL -> REST API Server
+1. test -> REST API Server -> mySQL -> REST API Server
+   - test = postman, selenium, python_requests
 2. REST API Server
     - Insert, Update, Select, Delete
 3. mySQL
