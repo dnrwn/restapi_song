@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$USER_HOME$/AppData/Local/Programs/Python/Python312/Lib/site-packages" />
     <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$/../test_script" />
     <orderEntry type="jdk" jdkName="Python 3.12" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

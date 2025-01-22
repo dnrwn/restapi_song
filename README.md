@@ -1,10 +1,32 @@
 예정 
-- nodejs server를 windows 서비스에 등록하는 script 작성 (bat)
-- README 파일 정리 검토 (통합 or 필요 없는 부분 삭제)
-- 포트폴리오 리뷰.pdf 파일 정리
-- excel_read, rest api server, 자동화 스크립트를 분리할지 검토
-- pytest init.py 파일 위치 정리 필요
-- mysql 서비스 시작 script 작성 (bat)
+- README 파일 정리 검토 (P2)
+  - 내용 정리, 통합 등 최신화
+- pytest init.py 파일 위치 정리 필요 (P2)
+- 포트폴리오 리뷰.pdf 파일 정리 (P3) # P2건 모두 정리된 이후 수행
+- db.py 재구조화 (P3) # rest api server는 테스트 자동화를 위한 도구이므로 중요도 낮음
+    - 현재 : db create, execute 코드만 만 작성되어 있음
+    - 변경 : 관리 및 유지보수 측면에서 독립적으로 구동되는 db로 재구조화할 필요 있음
+        - db_run.py (예)
+            - mysql install
+                - install + windows service 추가
+            - mysql uninstall
+                - uninstall + windows service 삭제
+            - db create
+                - connection info 포함
+        - db_execute.py (예)
+            - execute 기능만 있는 별도 모듈로 재구조화
+        - service_script.py
+            - mysql, nodjs windows service 컨트롤 script
+              - nodejs server를 windows 서비스에 등록하는 script 작성 (bat)
+
+2025-01-22 업데이트
+- excel_read, rest api server 이원화
+  - app 하위에 있는 자동화 script는 excel_read 쪽으로 통합하여 자동화로 카테고리 변경
+  - nodejs server를 postman과 관리될 수 있도록 통합
+  - Query.py 파일 위치 변경 (db_f 하위)
+  - rest api server console log 수집하는 script 추가
+  - print로 작성된 부분 정리 및 console log 이식
+- readme 에서 요구사항 내용 분리 (requirements.md)
 
 2025-01-20 업데이트 
 - idx가 없을 경우 예외처리 추가 (db.py)
@@ -29,91 +51,14 @@
 
 ########################################
 구조 요약
-1. test -> REST API Server -> mySQL -> REST API Server
-   - test = postman, selenium, python_requests
+1. test_script -> REST API Server -> mySQL -> REST API Server
+   - test_script = postman, selenium, python_requests
 2. REST API Server
     - Insert, Update, Select, Delete
 3. mySQL
     - Create DB, Insert, Update, Select, Delete
-4. Postman
-    - Insert, Update, Select, Delete
-5. Node js
-   - Postman Response Save
 
-########################################
-기능 요구사항
-1. Select // Method : GET
-- input
 
-| Parameter | type |Required| Description   |
-|-----------|------|---|---------------|
-| idx       | int  |Mandatory| 조회할 idx 필수 입력 |
-
-- output
-
-| Fild        | Type   | Description                                                                                                                                                                                   |
-|-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result      | String | - OK </br> - NG </br> - Error </br>                                                                                                                                                           |
-| Description | String | - NG : Insert NG </br> - Error : Null                                                                                                                                                         |
-| Message     | String | - NG : Exception Message                                                                                                                                                                      |
-| Data        | String | - OK : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : int </br> }] |
-
-2. Update // Method : POST
-- input
-
-| Parameter | type    | Required  | Description                   |
-|----|---------|-----------|-------------------------------|
-| idx | int     | Mandatory | 조회할 Idx 필수 입력                 |
-| input_1 | int     | Mandatory | 범위 :   -2147483648 ~ 2147483647 |
-| input_2 | String  | Optional  | 범위 : 5자리 이하                   |
-| input_3 | String  | Optional  | 범위 : 10자리 이하                  |
-| input_4 | Boolean | Optional  | true, false                   |
-
-- output
-
-| Fild        | Type   | Description                                                                                                                                                                                   |
-|-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result      | String | - OK </br> - NG </br> - Error </br>                                                                                                                                                           |
-| Description | String | - NG : Insert NG </br> - Error : Null                                                                                                                                                         |
-| Message     | String | - NG : Exception Message                                                                                                                                                                      |
-| Data        | String | - OK : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : int </br> }] |
-
-3. Insert // Method : POST
-- input
-
-| Parameter | type    | Required  | Description                   |
-|----|---------|-----------|-------------------------------|
-| input_1 | int     | Mandatory | 범위 :   -2147483648 ~ 2147483647 |
-| input_2 | String  | Optional  | 범위 : 5자리 이하                   |
-| input_3 | String  | Optional  | 범위 : 10자리 이하                  |
-| input_4 | Boolean | Optional  | true, false                   |
-
-- output
-
-| Fild        | Type   | Description                                                                                                                                                                                   |
-|-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result      | String | - OK </br> - NG </br> - Error </br>                                                                                                                                                           |
-| Description | String | - NG : Insert NG </br> - Error : Null                                                                                                                                                         |
-| Message     | String | - NG : Exception Message                                                                                                                                                                      |
-| Data        | String | - OK : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : int </br> }] |
-
-4. Delete // DELETE
-- input
-
-| Parameter | type |Required| Description   |
-|-----------|------|---|---------------|
-| idx       | int  |Mandatory| 조회할 idx 필수 입력 |
-
-- output
-
-| Fild        | Type   | Description                           |
-|-------------|--------|---------------------------------------|
-| Result      | String | - OK </br> - NG </br> - Error </br>   |
-| Description | String | - NG : Insert NG </br> - Error : Null |
-| Message     | String | - NG : Exception Message              |
-| Data        | String | - OK : idx                            |
-
-########################################
 포트폴리오 계획서
 
 [1] 목표 & 목적

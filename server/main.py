@@ -1,12 +1,15 @@
+import traceback, logging, datetime
+
+from server.db_f import Query
+import db_f.db as db
 from flask import Flask, request, render_template
 
-import traceback
-import Query
-import node
-import db_f.db as db
+server = Flask(__name__)
 
-app = Flask(__name__)
-
+# console log 수집 script
+time = datetime.datetime.now().strftime('%y%m%d_%H%M%S')
+logging.basicConfig(filename=f'log/server_{time}.log', level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 def response(a, b=None, c=None):
     if a == 0:
@@ -26,7 +29,7 @@ def response(a, b=None, c=None):
         }
 
 
-@app.route('/', methods=['GET'])
+@server.route('/', methods=['GET'])
 def default():
     a = (f'<p><a href="http://{ip}:{port}/func_1" methods="POST"> Select Update </a></p>'
          f'<p><a href="http://{ip}:{port}/func_2" methods="GET"> Insert </a></p> '
@@ -35,15 +38,15 @@ def default():
     return a
 
 
-@app.route('/ui')
+@server.route('/ui')
 def ui():
     return render_template('test_test.html')
 
 
 # DB 연동 기능 : Select, Update
-@app.route('/func_1', methods=['GET', 'POST'])
+@server.route('/func_1', methods=['GET', 'POST'])
 def func_1():
-    print(func_1.__name__)
+    server.logger.info(func_1.__name__)
     if request.method == 'GET':
         try:
             val = int(request.values.get('idx'))
@@ -52,7 +55,7 @@ def func_1():
             return a
 
         except Exception as m:
-            print(traceback.format_exc())
+            server.logger.info(traceback.format_exc())
             return response(0, 'Select', c=str(m))
 
     elif request.method == 'POST':
@@ -72,15 +75,14 @@ def func_1():
             return a
 
         except Exception as m:
-            print('main exception')
-            print(traceback.format_exc())
+            server.logger.info(traceback.format_exc())
             return response(0, 'Update', c=str(m))
 
 # DB 연동 기능 : insert
-@app.route('/func_2', methods=['POST'])
+@server.route('/func_2', methods=['POST'])
 def func_2():
     try:
-        print(func_2.__name__)
+        server.logger.info(func_2.__name__)
         if len(request.form) != 0:
             val = request.form.to_dict()
             val['input_1'] = int(val['input_1'])
@@ -95,15 +97,15 @@ def func_2():
         return b
 
     except Exception as m:
-        print(traceback.format_exc())
+        server.logger.info(traceback.format_exc())
         return response(0, 'Insert', c=str(m))
 
 
 # DB 연동 기능 : Delete
-@app.route('/func_3', methods=['POST', 'DELETE'])
+@server.route('/func_3', methods=['POST', 'DELETE'])
 def func_3():
     try:
-        print(func_3.__name__)
+        server.logger.info(func_3.__name__)
         if len(request.form) != 0 and request.method == 'POST':
             val = int(request.form['idx'])
         else:
@@ -114,11 +116,13 @@ def func_3():
         return a
 
     except Exception as m:
-        print(traceback.format_exc())
+        server.logger.info(traceback.format_exc())
         return response(0, 'Delete', c=str(m))
 
 
 if __name__ == "__main__":
+    # server 구동부
     ip = 'localhost'
     port = 70
-    app.run(host=ip, port=port, debug=True)
+    server.run(host=ip, port=port, debug=True)
+
