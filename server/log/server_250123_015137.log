@@ -1,0 +1,3 @@
+2025-01-23 01:51:37,299 WARNING werkzeug MainThread :  * Debugger is active!
+2025-01-23 01:51:37,306 INFO werkzeug MainThread :  * Debugger PIN: 846-340-584
+2025-01-23 01:51:38,338 INFO werkzeug MainThread :  * Detected change in 'C:\\code\\PycharmProjects\\test_script\\Selenium\\item\\element_list.py', reloading

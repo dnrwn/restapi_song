@@ -1,0 +1,81 @@
+2025-01-23 01:49:56,900 WARNING werkzeug MainThread :  * Debugger is active!
+2025-01-23 01:49:56,906 INFO werkzeug MainThread :  * Debugger PIN: 846-340-584
+2025-01-23 01:50:19,523 INFO main Thread-2 (process_request_thread) : ui
+2025-01-23 01:50:19,525 INFO werkzeug Thread-2 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:19] "GET /ui HTTP/1.1" 200 -
+2025-01-23 01:50:19,583 INFO werkzeug Thread-3 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:19] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-01-23 01:50:20,062 INFO main Thread-4 (process_request_thread) : func_2
+2025-01-23 01:50:20,076 INFO werkzeug Thread-4 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:20] "POST /func_2 HTTP/1.1" 200 -
+2025-01-23 01:50:20,629 INFO main Thread-5 (process_request_thread) : ui
+2025-01-23 01:50:20,630 INFO werkzeug Thread-5 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:20] "GET /ui HTTP/1.1" 200 -
+2025-01-23 01:50:21,255 INFO main Thread-6 (process_request_thread) : func_2
+2025-01-23 01:50:21,258 INFO main Thread-6 (process_request_thread) : Traceback (most recent call last):
+  File "C:\code\PycharmProjects\song\server\main.py", line 96, in func_2
+    db.Database.execute(Query.post_insert(val))
+  File "C:\code\PycharmProjects\song\server\db_f\db.py", line 34, in execute
+    self.cursor.execute(query, args)
+  File "C:\Users\¼Û¹Î±Ô\AppData\Local\Programs\Python\Python312\Lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\¼Û¹Î±Ô\AppData\Local\Programs\Python\Python312\Lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\Users\¼Û¹Î±Ô\AppData\Local\Programs\Python\Python312\Lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\¼Û¹Î±Ô\AppData\Local\Programs\Python\Python312\Lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "C:\Users\¼Û¹Î±Ô\AppData\Local\Programs\Python\Python312\Lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\¼Û¹Î±Ô\AppData\Local\Programs\Python\Python312\Lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "C:\Users\¼Û¹Î±Ô\AppData\Local\Programs\Python\Python312\Lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\Users\¼Û¹Î±Ô\AppData\Local\Programs\Python\Python312\Lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.DataError: (1264, "Out of range value for column 'input_1' at row 1")
+
+2025-01-23 01:50:21,259 INFO werkzeug Thread-6 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:21] "POST /func_2 HTTP/1.1" 200 -
+2025-01-23 01:50:21,652 INFO main Thread-7 (process_request_thread) : ui
+2025-01-23 01:50:21,652 INFO werkzeug Thread-7 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:21] "GET /ui HTTP/1.1" 200 -
+2025-01-23 01:50:21,962 INFO main Thread-8 (process_request_thread) : func_1
+2025-01-23 01:50:21,963 INFO werkzeug Thread-8 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:21] "GET /func_1?idx=2 HTTP/1.1" 200 -
+2025-01-23 01:50:22,347 INFO main Thread-9 (process_request_thread) : ui
+2025-01-23 01:50:22,348 INFO werkzeug Thread-9 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:22] "GET /ui HTTP/1.1" 200 -
+2025-01-23 01:50:22,662 INFO main Thread-10 (process_request_thread) : func_1
+2025-01-23 01:50:22,663 INFO main Thread-10 (process_request_thread) : Traceback (most recent call last):
+  File "C:\code\PycharmProjects\song\server\main.py", line 57, in func_1
+    a['data'] = db.Database.execute(Query.get_select_one(val))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\code\PycharmProjects\song\server\db_f\db.py", line 38, in execute
+    raise ValueError('Index not found')
+ValueError: Index not found
+
+2025-01-23 01:50:22,663 INFO werkzeug Thread-10 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:22] "GET /func_1?idx=-2147483649 HTTP/1.1" 200 -
+2025-01-23 01:50:23,053 INFO main Thread-11 (process_request_thread) : ui
+2025-01-23 01:50:23,053 INFO werkzeug Thread-11 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:23] "GET /ui HTTP/1.1" 200 -
+2025-01-23 01:50:23,484 INFO main Thread-12 (process_request_thread) : func_1
+2025-01-23 01:50:23,490 INFO werkzeug Thread-12 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:23] "POST /func_1 HTTP/1.1" 200 -
+2025-01-23 01:50:23,886 INFO main Thread-13 (process_request_thread) : ui
+2025-01-23 01:50:23,886 INFO werkzeug Thread-13 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:23] "GET /ui HTTP/1.1" 200 -
+2025-01-23 01:50:24,288 INFO main Thread-14 (process_request_thread) : func_1
+2025-01-23 01:50:24,289 INFO main Thread-14 (process_request_thread) : Traceback (most recent call last):
+  File "C:\code\PycharmProjects\song\server\main.py", line 73, in func_1
+    db.Database.execute(Query.get_select_one(int(val['idx'])))
+  File "C:\code\PycharmProjects\song\server\db_f\db.py", line 38, in execute
+    raise ValueError('Index not found')
+ValueError: Index not found
+
+2025-01-23 01:50:24,289 INFO werkzeug Thread-14 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:24] "POST /func_1 HTTP/1.1" 200 -
+2025-01-23 01:50:24,671 INFO main Thread-15 (process_request_thread) : ui
+2025-01-23 01:50:24,672 INFO werkzeug Thread-15 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:24] "GET /ui HTTP/1.1" 200 -
+2025-01-23 01:50:24,987 INFO main Thread-16 (process_request_thread) : func_3
+2025-01-23 01:50:24,988 INFO werkzeug Thread-16 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:24] "POST /func_3 HTTP/1.1" 200 -
+2025-01-23 01:50:25,396 INFO main Thread-17 (process_request_thread) : ui
+2025-01-23 01:50:25,396 INFO werkzeug Thread-17 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:25] "GET /ui HTTP/1.1" 200 -
+2025-01-23 01:50:25,701 INFO main Thread-18 (process_request_thread) : func_3
+2025-01-23 01:50:25,703 INFO werkzeug Thread-18 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:25] "POST /func_3 HTTP/1.1" 200 -
+2025-01-23 01:50:26,091 INFO main Thread-19 (process_request_thread) : ui
+2025-01-23 01:50:26,091 INFO werkzeug Thread-19 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:26] "GET /ui HTTP/1.1" 200 -
+2025-01-23 01:50:26,400 INFO main Thread-20 (process_request_thread) : func_3
+2025-01-23 01:50:26,401 INFO werkzeug Thread-20 (process_request_thread) : 127.0.0.1 - - [23/Jan/2025 01:50:26] "POST /func_3 HTTP/1.1" 200 -
+2025-01-23 01:51:36,839 INFO werkzeug MainThread :  * Detected change in 'C:\\code\\PycharmProjects\\test_script\\Selenium\\item\\element_list.py', reloading

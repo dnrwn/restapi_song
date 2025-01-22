@@ -2,6 +2,7 @@ import traceback, logging, datetime
 
 from server.db_f import Query
 import db_f.db as db
+
 from flask import Flask, request, render_template
 
 server = Flask(__name__)
@@ -31,6 +32,7 @@ def response(a, b=None, c=None):
 
 @server.route('/', methods=['GET'])
 def default():
+    server.logger.info(default.__name__)
     a = (f'<p><a href="http://{ip}:{port}/func_1" methods="POST"> Select Update </a></p>'
          f'<p><a href="http://{ip}:{port}/func_2" methods="GET"> Insert </a></p> '
          f'<p><a href="http://{ip}:{port}/func_3" methods="POST"> Delete </a></p> '
@@ -40,6 +42,7 @@ def default():
 
 @server.route('/ui')
 def ui():
+    server.logger.info(ui.__name__)
     return render_template('test_test.html')
 
 
