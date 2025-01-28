@@ -1,15 +1,14 @@
 import traceback, logging, datetime
-
-from server.db_f import Query
-import db_f.db as db
-
 from flask import Flask, request, render_template
+
+import db_f.Query as Query
+import db_f.db as db
 
 server = Flask(__name__)
 
 # console log 수집 script
 time = datetime.datetime.now().strftime('%y%m%d_%H%M%S')
-logging.basicConfig(filename=f'log/server_{time}.log', level=logging.INFO,
+logging.basicConfig(filename=f'server/log/server_{time}.log', level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 def response(a, b=None, c=None):
