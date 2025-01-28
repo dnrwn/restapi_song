@@ -21,6 +21,7 @@
 
 2025-01-28 업데이트
 github webhooks -> jenkins pipeline 연동
+-=
 
 2025-01-22 업데이트
 - excel_read, rest api server 이원화
