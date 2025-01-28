@@ -19,6 +19,9 @@
             - mysql, nodjs windows service 컨트롤 script
               - nodejs server를 windows 서비스에 등록하는 script 작성 (bat)
 
+2025-01-28 업데이트
+github webhooks -> jenkins pipeline 연동
+
 2025-01-22 업데이트
 - excel_read, rest api server 이원화
   - app 하위에 있는 자동화 script는 excel_read 쪽으로 통합하여 자동화로 카테고리 변경
