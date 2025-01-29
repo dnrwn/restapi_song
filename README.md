@@ -29,9 +29,10 @@
 - docker build 시 필요한 yml 파일 추가
   - db, server 정보 작성 및 해당 정보로 서버 구동
 
+- docker에서 nodejs server도 구동되도록 compose file 수정
+
 2025-01-28 업데이트
 github webhooks -> jenkins pipeline 연동
--=
 
 2025-01-22 업데이트
 - excel_read, rest api server 이원화
