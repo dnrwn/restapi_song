@@ -1,0 +1,12 @@
+{
+  "name": "postman_response_node",
+  "version": "1.4.0",
+  "description": "",
+  "main": "postman_response_node_v1.4.0.js",
+  "scripts": {
+    "start": "node postman_response_node_v1.4.0.js -test"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

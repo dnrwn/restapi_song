@@ -36,10 +36,12 @@ def response(a, b=None, c=None):
 @server.route('/', methods=['GET'])
 def default():
     server.logger.info(default.__name__)
-    a = (f'<p><a href="http://{ip}:{port}/func_1" methods="POST"> Select Update </a></p>'
-         f'<p><a href="http://{ip}:{port}/func_2" methods="GET"> Insert </a></p> '
-         f'<p><a href="http://{ip}:{port}/func_3" methods="POST"> Delete </a></p> '
-         f'<p><a href="http://{ip}:{port}/ui" > web app </a></p>')
+    ip_1 = request.host.split(':')[0]
+    po_1 = request.host.split(':')[1]
+    a = (f'<p><a href="http://{ip_1}:{po_1}/func_1" methods="POST"> Select Update </a></p>'
+         f'<p><a href="http://{ip_1}:{po_1}/func_2" methods="GET"> Insert </a></p> '
+         f'<p><a href="http://{ip_1}:{po_1}/func_3" methods="POST"> Delete </a></p> '
+         f'<p><a href="http://{ip_1}:{po_1}/ui" > web app </a></p>')
     return a
 
 

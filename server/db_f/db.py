@@ -4,6 +4,7 @@ import pymysql
 class Database:
     def __init__(self):
         try:
+            print('db in')
             self.db = pymysql.connect(host='db',
                                       user='root',
                                       password='qwer1234',
@@ -12,6 +13,7 @@ class Database:
                                       port=3306)
             self.cursor = self.db.cursor(pymysql.cursors.DictCursor)
         except Exception as m:
+            print('db error')
             print(m)
             self.db = pymysql.connect(host='db',
                                       user='root',
@@ -20,6 +22,7 @@ class Database:
                                       port=3306)
             self.cursor = self.db.cursor(pymysql.cursors.DictCursor)
             self.cursor.execute("CREATE DATABASE new_db;")
+
             q = "CREATE TABLE new_db.item (" \
                 "idx int(2) NOT NULL AUTO_INCREMENT PRIMARY KEY," \
                 "input_1 int(2) DEFAULT NULL," \
@@ -29,8 +32,10 @@ class Database:
                 "Create_date varchar(255) DEFAULT NULL," \
                 "Update_date varchar(255) DEFAULT NULL);"
             self.cursor.execute(q)
+            self.db.commit()
 
     def execute(self, query, args=None):
+        print('db execute')
         if args is None:
             args = {}
         self.cursor.execute(query, args)
