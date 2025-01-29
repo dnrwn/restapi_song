@@ -4,18 +4,20 @@ import pymysql
 class Database:
     def __init__(self):
         try:
-            self.db = pymysql.connect(host='localhost',
+            self.db = pymysql.connect(host='db',
                                       user='root',
                                       password='qwer1234',
                                       db='new_db',
-                                      charset='utf8')
+                                      charset='utf8',
+                                      port=3306)
             self.cursor = self.db.cursor(pymysql.cursors.DictCursor)
         except Exception as m:
             print(m)
-            self.db = pymysql.connect(host='localhost',
+            self.db = pymysql.connect(host='db',
                                       user='root',
                                       password='qwer1234',
-                                      charset='utf8')
+                                      charset='utf8',
+                                      port=3306)
             self.cursor = self.db.cursor(pymysql.cursors.DictCursor)
             self.cursor.execute("CREATE DATABASE new_db;")
             q = "CREATE TABLE new_db.item (" \

@@ -1,4 +1,4 @@
-import traceback, logging, datetime
+import traceback, logging, datetime, configparser
 from flask import Flask, request, render_template
 
 import db_f.Query as Query
@@ -6,9 +6,13 @@ import db_f.db as db
 
 server = Flask(__name__)
 
+config = configparser.ConfigParser()
+config.read('server/config.ini')
+path = config['server']['directory']
+
 # console log 수집 script
 time = datetime.datetime.now().strftime('%y%m%d_%H%M%S')
-logging.basicConfig(filename=f'server/log/server_{time}.log', level=logging.INFO,
+logging.basicConfig(filename=f'{path}log/server_{time}.log', level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 def response(a, b=None, c=None):
@@ -124,7 +128,7 @@ def func_3():
 
 if __name__ == "__main__":
     # server 구동부
-    ip = 'localhost'
-    port = 70
+    ip = config['server']['ip']
+    port = config['server']['port']
     server.run(host=ip, port=port, debug=True)
 

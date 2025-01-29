@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: "qwer1234"
+      MYSQL_DATABASE: "new_db"
+      MYSQL_USER: "user1"
+      MYSQL_PASSWORD: "qawsedrf1234"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./server/db_f/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./server/db_f/mysql.cnf:/etc/mysql/my.cnf
+
+  flask_app:
+    build: .
+    ports:
+      - "70:70"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_HOST="db"
+      - DATABASE_USER="root"
+      - DATABASE_PASSWORD="qwer1234"
+      - DATABASE_NAME="new_db"
