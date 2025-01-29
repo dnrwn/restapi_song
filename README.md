@@ -1,3 +1,29 @@
+이슈
+docker 컨테이너에서 실행하면 mysql 에서 error 발생함
+- mysql 설치하고 초기 세팅하는 부분이 생략돼서 그런듯
+- mysql에서 db table이 없을 경우 추가하는 script는 있는데 계정 생성하는 부분이 없어서 그런듯 
+
+젠킨스 계획
+jenkins job을 restapi server, testscript로 나눠서
+각각 리포지토리에서 webhook event 받으면 git clone 실행하는 파이프라인 생성
+상세
+1. restapi job
+- https://github.com/dnrwn/restapi_song git clone
+- clone 완료 후 jenkins_C로 trigger 발생
+2. testscript job
+- https://github.com/dnrwn/testscript_song git clone
+- clone 완료 후 jenkins_C로 trigger 발생 (restapi job의 파이프라인이랑 중복되는 문제가 있어서 이후 정리 필요)
+3. jenkins_C :
+- restapi와 testscript의 워크스페이스를 공유 받음
+- server와 test script (excel_read)를 병렬로 실행하여 테스트 작업 실행 (server의 경우 종료가 안되는 service라 testscript 실행 완료될 시간 30초를 timeout으로 설정함)
+- jenkins_D로 trigger 발생
+4. jenkins_D(예정)
+※ docker에서 수동으로 작업한 뒤에 진행 예정
+- docker 이미지 생성, 빌드
+- docker 컨테이너 실행
+- docker 컨테이너 모니터링
+
+
 예정 
 - README 파일 정리 검토 (P2)
   - 내용 정리, 통합 등 최신화
@@ -18,6 +44,10 @@
         - service_script.py
             - mysql, nodjs windows service 컨트롤 script
               - nodejs server를 windows 서비스에 등록하는 script 작성 (bat)
+
+2025-01-28 업데이트
+github webhooks -> jenkins pipeline 연동
+-=
 
 2025-01-22 업데이트
 - excel_read, rest api server 이원화
