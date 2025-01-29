@@ -1,4 +1,4 @@
-예정1
+예정3
 1. Jenkins CI/CD 구축
 - clone, test, deploy (build는 python 환경에서 필요 없어서 추후 c++, java 로 진행 예정)
 - test의 경우 어떤 방식으로 운영할지 검토 필요
