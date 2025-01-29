@@ -45,6 +45,11 @@ jenkins job을 restapi server, testscript로 나눠서
             - mysql, nodjs windows service 컨트롤 script
               - nodejs server를 windows 서비스에 등록하는 script 작성 (bat)
 
+2025-01-29 업데이트
+- confing.ini 파일 추가
+  - ip, port, path 등 data 정리
+- docker 환경에서 구동될 수 있도록 적용
+
 2025-01-28 업데이트
 github webhooks -> jenkins pipeline 연동
 -=
