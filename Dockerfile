@@ -9,7 +9,8 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # wait-for-it.sh 스크립트 복사
-COPY wait-for-it.sh /app/wait-for-it.sh
+COPYwait-for-it.sh /app/wait-for-it.sh
+RUN chmod +x /app/wait-for-it.sh
 
 # 코드 복사
 COPY . .
