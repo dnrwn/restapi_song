@@ -28,6 +28,9 @@
     - init.sql은 추후에 삭제 검토 (필요 없어 보임)
 - docker build 시 필요한 yml 파일 추가
   - db, server 정보 작성 및 해당 정보로 서버 구동
+- docker에서 실행할 경우 flask로 구동 중인 web app에 진입 안되는 이슈 해결
+  - 0.0.0.0으로 진입이 되질 않아서 default page에 진입한 ip, port를 이어서 사용하는 code 추가 (request.host)
+
 
 - docker에서 nodejs server도 구동되도록 compose file 수정
 
