@@ -49,6 +49,7 @@ jenkins job을 restapi server, testscript로 나눠서
 - confing.ini 파일 추가
   - ip, port, path 등 data 정리
 - docker 환경에서 구동될 수 있도록 적용
+  - config.ini, db config
 
 2025-01-28 업데이트
 github webhooks -> jenkins pipeline 연동
