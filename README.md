@@ -1,3 +1,7 @@
+이슈
+1. github에서 webhook 로그가 정상 (200) 으로 보내지고 jenkins에서 hook log가 출력되는데 파이프라인 트리거가 되질 않음
+2. jenkins에서 docker로 배포하고 실행하면 flask가 실행되지 않음
+
 예정
 1. Jenkins CI/CD 구축
 - clone, test, deploy (build는 python 환경에서 필요 없어서 추후 c++, java 로 진행 예정)
