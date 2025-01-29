@@ -1,4 +1,15 @@
-예정 
+예정
+1. Jenkins CI/CD 구축
+- clone, test, deploy (build는 python 환경에서 필요 없어서 추후 c++, java 로 진행 예정)
+- test의 경우 어떤 방식으로 운영할지 검토 필요
+  - Jenkins > 자동 테스트 수행
+- 배포 > deploy 절차로 docker에 dev server 구축해서 매뉴얼 테스트 환경 구성
+- 배포 > release 절차로 매뉴얼 테스트 완료 시 docker에 수동으로 배포하는 Job 구성
+- CI/CD 구축 과정들 Notion에 정리 (구축 과정, pipeline 운영법, 이슈 및 얻은 지식 등)
+- Jenkins job : restapi, testscript, jenkins_C (restapi run, testscript run), jenkins_D (docker 배포), jenkins_E (docker 배포 / Release server)
+  - jenkins_C에서 restapi, testscript 워크스페이스를 공유 받아서 작업을 수행하는데, pipeline에 절대 경로로 작성하였으나 가독성 및 보안 이슈로 인해 수정 필요
+
+2. 파일 정리
 - README 파일 정리 검토 (P2)
   - 내용 정리, 통합 등 최신화
 - pytest init.py 파일 위치 정리 필요 (P2)
@@ -20,19 +31,15 @@
               - nodejs server를 windows 서비스에 등록하는 script 작성 (bat)
 
 2025-01-29 업데이트
-- confing.ini 파일 추가
-  - ip, port, path 등 data 정리
 - docker 환경에서 구동될 수 있도록 config file 추가
-  - rest api : config.ini
+  - rest api : config.ini (ip, port, path)
   - db : mysql.cnf, init.sql (계정 생성)
-    - init.sql은 추후에 삭제 검토 (필요 없어 보임)
+    - init.sql은 추후에 삭제 검토 (root 계정만 사용해서 다른 계정 생성할 필요 없어 보임)
 - docker build 시 필요한 yml 파일 추가
   - db, server 정보 작성 및 해당 정보로 서버 구동
 - docker에서 실행할 경우 flask로 구동 중인 web app에 진입 안되는 이슈 해결
   - 0.0.0.0으로 진입이 되질 않아서 default page에 진입한 ip, port를 이어서 사용하는 code 추가 (request.host)
-
-
-- docker에서 nodejs server도 구동되도록 compose file 수정
+- docker에서 nodejs server도 구동되도록 compose file 추가
 
 2025-01-28 업데이트
 github webhooks -> jenkins pipeline 연동
