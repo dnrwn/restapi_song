@@ -1,21 +1,9 @@
-1. jenkins에서 docker로 배포하고 실행하면 flask가 실행되지 않음
-- wait sh 파일 실행 때 줄넘김 처리가 제대로 되지 않음 (windows, linux 차이)
-- db 지우고 wait 없이도 잘 구동되는지 확인해서 wait sh 파일 삭제 검토 (or 다른 방법 조사)
-  - wait sh 파일 없으면 수동으로 docker에 올려도 flask 구동 안됨
-- 원인 
-  - wait-for-it.sh 파일이 linux에서 사용되기 위해 줄바꿈 형식을 LF로 설정할 필요가 있음
-  - github로 push될 때까지만 해도 해당 설정이 유지되는데
-  - jenkins에서 clone하고 image로 빌드하는 과정에서 해당 설정이 CRLF로 변경됨
-  - 개발 환경의 git 설정을 변경해도 해결 안됨 (git config --global core.autocrlf false)
-  - github 리포지토리에 lf 설정을 적용하는 .gitattributes 파일을 추가해도 해결 안됨
-  - 젠킨스 워크스페이스 초기화 후 해결 확인 (git config인지, .gitattributes 파일 때문인지 해결 포인트 못찾음)
-
 예정
 1. Jenkins CI/CD 구축
-- clone, test, deploy (build는 python 환경에서 필요 없어서 추후 c++, java 로 진행 예정)
+- clone, test, deploy (build는 python 환경에서 필요 없어서 추후 c++, java 로 진행 예정) [완료]
 - test의 경우 어떤 방식으로 운영할지 검토 필요
   - Jenkins > 자동 테스트 수행
-- 배포 > deploy 절차로 docker에 dev server 구축해서 매뉴얼 테스트 환경 구성
+- 배포 > deploy 절차로 docker에 dev server 구축해서 매뉴얼 테스트 환경 구성 [완료]
 - 배포 > release 절차로 매뉴얼 테스트 완료 시 docker에 수동으로 배포하는 Job 구성
 - CI/CD 구축 과정들 Notion에 정리 (구축 과정, pipeline 운영법, 이슈 및 얻은 지식 등)
 - Jenkins job : restapi, testscript, jenkins_C (restapi run, testscript run), jenkins_D (docker 배포), jenkins_E (docker 배포 / Release server)
@@ -43,9 +31,22 @@
               - nodejs server를 windows 서비스에 등록하는 script 작성 (bat)
 
 2025-01-30 업데이트
-리포지토리 브랜치 이름 변경
+1. 리포지토리 브랜치 이름 변경
 - 이슈 : github에서 webhook 로그가 정상 (200) 으로 보내지고 jenkins에서 hook log가 출력되는데 파이프라인 트리거가 되질 않음
 - 해결 : 브랜치 이름이 25-01-28로 되어 있었는데 master로 바꾸고 난 뒤에는 파이프라인 트리거 잘 됨
+2. docker에서 flask가 실행되지 않음
+- 원인1
+  - db가 시작되기 전에 flask를 구동하려고 하면 error 발생
+  - 해결 : wait sh 파일을 통해 60초간 db 상태를 체크해서 flask를 구동하도록 dockerfile 반영
+- 원인2 
+  - wait-for-it.sh 파일이 linux에서 사용되기 위해 줄바꿈 형식을 LF로 설정할 필요가 있음
+  - github로 push될 때까지만 해도 해당 설정이 유지되는데
+  - jenkins에서 clone하고 image로 빌드하는 과정에서 해당 설정이 CRLF로 변경됨
+  - 개발 환경의 git 설정을 변경해도 해결 안됨 (git config --global core.autocrlf false)
+  - github 리포지토리에 lf 설정을 적용하는 .gitattributes 파일을 추가해도 해결 안됨
+  - 해결 : 젠킨스 워크스페이스 초기화 후 해결 확인
+  - git config인지, .gitattributes 파일 때문인지, 기존 워크스페이스에 있는 파일에 덮어쓰기가 되지 않고 무시돼서 발생한 문제인지 해결 포인트 못찾음
+
 
 2025-01-29 업데이트
 - docker 환경에서 구동될 수 있도록 config file 추가
