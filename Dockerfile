@@ -16,6 +16,7 @@ COPY wait-for-it.sh /app/wait-for-it.sh
 RUN sed -i 's/\r$//' /app/wait-for-it.sh
 RUN chmod +x /app/wait-for-it.sh
 
+
 # 코드 복사
 COPY . .
 
