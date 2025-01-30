@@ -1,4 +1,4 @@
-이슈1
+이슈12
 1. github에서 webhook 로그가 정상 (200) 으로 보내지고 jenkins에서 hook log가 출력되는데 파이프라인 트리거가 되질 않음
 2. jenkins에서 docker로 배포하고 실행하면 flask가 실행되지 않음
 - wait sh 파일 실행 때 줄넘김 처리가 제대로 되지 않음 (windows, linux 차이)
