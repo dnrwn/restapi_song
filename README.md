@@ -1,6 +1,5 @@
 이슈111
-1. github에서 webhook 로그가 정상 (200) 으로 보내지고 jenkins에서 hook log가 출력되는데 파이프라인 트리거가 되질 않음
-2. jenkins에서 docker로 배포하고 실행하면 flask가 실행되지 않음
+1. jenkins에서 docker로 배포하고 실행하면 flask가 실행되지 않음
 - wait sh 파일 실행 때 줄넘김 처리가 제대로 되지 않음 (windows, linux 차이)
 - db 지우고 wait 없이도 잘 구동되는지 확인해서 wait sh 파일 삭제 검토 (or 다른 방법 조사)
   - wait sh 파일 없으면 수동으로 docker에 올려도 flask 구동 안됨
@@ -36,6 +35,11 @@
         - service_script.py
             - mysql, nodjs windows service 컨트롤 script
               - nodejs server를 windows 서비스에 등록하는 script 작성 (bat)
+
+2025-01-30 업데이트
+리포지토리 브랜치 이름 변경
+- 이슈 : github에서 webhook 로그가 정상 (200) 으로 보내지고 jenkins에서 hook log가 출력되는데 파이프라인 트리거가 되질 않음
+- 해결 : 브랜치 이름이 25-01-28로 되어 있었는데 master로 바꾸고 난 뒤에는 파이프라인 트리거 잘 됨
 
 2025-01-29 업데이트
 - docker 환경에서 구동될 수 있도록 config file 추가
