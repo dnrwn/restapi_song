@@ -3,6 +3,13 @@
 - wait sh 파일 실행 때 줄넘김 처리가 제대로 되지 않음 (windows, linux 차이)
 - db 지우고 wait 없이도 잘 구동되는지 확인해서 wait sh 파일 삭제 검토 (or 다른 방법 조사)
   - wait sh 파일 없으면 수동으로 docker에 올려도 flask 구동 안됨
+- 원인 
+  - wait-for-it.sh 파일이 linux에서 사용되기 위해 줄바꿈 형식을 LF로 설정할 필요가 있음
+  - github로 push될 때까지만 해도 해당 설정이 유지되는데
+  - jenkins에서 clone하고 image로 빌드하는 과정에서 해당 설정이 CRLF로 변경됨
+  - 개발 환경의 git 설정을 변경해도 해결 안됨 (git config --global core.autocrlf false)
+  - github 리포지토리에 lf 설정을 적용하는 .gitattributes 파일을 추가해도 해결 안됨
+  - 파이프라인 단계에서 lf 설정으로 
 
 예정
 1. Jenkins CI/CD 구축
