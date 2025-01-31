@@ -1,3 +1,5 @@
+젠킨스 재구축
+
 예정
 1. Jenkins CI/CD 구축
 - clone, test, deploy (build는 python 환경에서 필요 없어서 추후 c++, java 로 진행 예정) [완료]
