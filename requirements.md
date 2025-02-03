@@ -1,3 +1,6 @@
+값의 범위에 대한 예외 처리 -> db.py
+값 Required에 대한 예외 처리 -> main.py
+
 ########################################
 기능 요구사항
 1. Select // Method : GET
@@ -11,10 +14,10 @@
 
 | Fild        | Type   | Description                                                                                                                                                                                   |
 |-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result      | String | - OK </br> - NG </br> - Error </br>                                                                                                                                                           |
-| Description | String | - NG : Insert NG </br> - Error : Null                                                                                                                                                         |
+| Result      | String | - PASS </br> - NG </br> - Error </br>                                                                                                                                                           |
+| Description | String | - NG : Select NG </br> - Error : Null                                                                                                                                                         |
 | Message     | String | - NG : Exception Message                                                                                                                                                                      |
-| Data        | String | - OK : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : int </br> }] |
+| Data        | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : int </br> }] |
 
 2. Update // Method : POST
 - input
@@ -31,10 +34,10 @@
 
 | Fild        | Type   | Description                                                                                                                                                                                   |
 |-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result      | String | - OK </br> - NG </br> - Error </br>                                                                                                                                                           |
-| Description | String | - NG : Insert NG </br> - Error : Null                                                                                                                                                         |
+| Result      | String | - PASS </br> - NG </br> - Error </br>                                                                                                                                                           |
+| Description | String | - NG : Update NG </br> - Error : Null                                                                                                                                                         |
 | Message     | String | - NG : Exception Message                                                                                                                                                                      |
-| Data        | String | - OK : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : int </br> }] |
+| Data        | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : int </br> }] |
 
 3. Insert // Method : POST
 - input
@@ -50,12 +53,12 @@
 
 | Fild        | Type   | Description                                                                                                                                                                                   |
 |-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result      | String | - OK </br> - NG </br> - Error </br>                                                                                                                                                           |
+| Result      | String | - PASS </br> - NG </br> - Error </br>                                                                                                                                                           |
 | Description | String | - NG : Insert NG </br> - Error : Null                                                                                                                                                         |
 | Message     | String | - NG : Exception Message                                                                                                                                                                      |
-| Data        | String | - OK : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : int </br> }] |
+| Data        | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : int </br> }] |
 
-4. Delete // DELETE
+4. Delete // Method : DELETE
 - input
 
 | Parameter | type |Required| Description   |
@@ -66,9 +69,9 @@
 
 | Fild        | Type   | Description                           |
 |-------------|--------|---------------------------------------|
-| Result      | String | - OK </br> - NG </br> - Error </br>   |
-| Description | String | - NG : Insert NG </br> - Error : Null |
+| Result      | String | - PASS </br> - NG </br> - Error </br>   |
+| Description | String | - NG : Delete NG </br> - Error : Null |
 | Message     | String | - NG : Exception Message              |
-| Data        | String | - OK : idx                            |
+| Data        | String | - PASS : idx                            |
 
 ########################################
