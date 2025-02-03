@@ -40,11 +40,11 @@ def response(a, b=None, c=None):
 ########## Route func ##########
 @server.route('/', methods=['GET'])
 def route_default():
-    return logic_default()
+    return logic_default(request.host)
 
 @server.route('/ui')
 def route_ui():
-    return logic_ui()
+    return logic_ui('test_test.html')
 
 @server.route('/func_1', methods=['GET'])
 def route_func_1():
@@ -64,20 +64,20 @@ def route_func_4():
 
 
 ########## Logic func ##########
-def logic_default():
+def logic_default(route_data):
     server.logger.info(logic_default.__name__)
-    ip_1 = request.host.split(':')[0]
-    po_1 = request.host.split(':')[1]
-    a = (f'<p><a href="http://{ip_1}:{po_1}/func_1" methods="POST"> Select Update </a></p>'
-         f'<p><a href="http://{ip_1}:{po_1}/func_2" methods="GET"> Insert </a></p> '
-         f'<p><a href="http://{ip_1}:{po_1}/func_3" methods="POST"> Delete </a></p> '
+    ip_1 = route_data.split(':')[0]
+    po_1 = route_data.split(':')[1]
+    a = (f'<p><a href="http://{ip_1}:{po_1}/func_1" methods="GET"> Select </a></p>'
+         f'<p><a href="http://{ip_1}:{po_1}/func_2" methods="POST"> Update </a></p>'
+         f'<p><a href="http://{ip_1}:{po_1}/func_3" methods="GET"> Insert </a></p> '
+         f'<p><a href="http://{ip_1}:{po_1}/func_4" methods="POST"> Delete </a></p> '
          f'<p><a href="http://{ip_1}:{po_1}/ui" > web app </a></p>')
     return a
 
-def logic_ui(): # 기본 UI
+def logic_ui(route_data='test_test.html'): # 기본 UI
     server.logger.info(logic_ui.__name__)
-    return render_template('test_test.html')
-
+    return render_template(route_data)
 
 def logic_select(route_data): # Select
     server.logger.info(logic_select.__name__)
@@ -98,7 +98,8 @@ def logic_update(route_data): # Update
             val = route_data.form.to_dict()
             val['idx'] = int(val['idx'])
             val['input_1'] = int(val['input_1'])
-            val['input_4'] = int(val['input_4'])
+            val['input_4'] = bool(val['input_4'])
+
         else:
             val = route_data.get_json()
         db.Database.execute(Query.get_select_one(int(val['idx'])))

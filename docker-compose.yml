@@ -27,3 +27,6 @@ services:
     build: ./server/postman_response_node-main
     ports:
       - "3000:3000"
+
+volumes:
+  db_data:
