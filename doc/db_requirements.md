@@ -2,9 +2,9 @@
 # db.py, Query.py Unit Test용 요구사항
 
 ## 목차
--[Database]
-- [Database](#init)
-- [Database](#execute)
+- [Database]
+  - [Database](#init)
+  - [Database](#execute)
 
 ## __init__
 - **Input**
