@@ -107,7 +107,7 @@ def logic_update(route_data): # Update
         a = db.Database.execute(Query.get_select_one(int(val['idx'])))
         b = response(1)
         b['data'] = a
-        return a
+        return b
 
     except Exception as m:
         server.logger.info(traceback.format_exc())
