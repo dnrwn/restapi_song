@@ -1,0 +1,42 @@
+
+# db.py Unit Test용 요구사항
+
+## 목차
+- [Database](#__init__)
+- [Database](#execute)
+
+## __init__
+- **Input**
+
+| Parameter | Type   | Required  | Description    |
+|-----------|--------|-----------|----------------|
+| a         | int    | Mandatory | 0, 1, else     |
+| b         | string | Optional  | default = None |
+| c         | string | Optional  | default= None  |
+
+- **Output**
+
+| Field        | Type   | Description                                                                                                                                                                                   |
+|--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
+| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
+| Message      | String | - c                                                                                                                                                                                           |
+| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+
+
+## execute
+
+- **Input**
+
+| Parameter | Type   | Required  | Description    |
+|-----------|--------|-----------|----------------|
+| -         | -      | -         | -              |
+
+- **Output**
+
+| Field        | Type   | Description                                                                                                                                                                                   |
+|--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
+| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
+| Message      | String | - c                                                                                                                                                                                           |
+| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
