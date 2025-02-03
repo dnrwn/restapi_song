@@ -1,6 +1,6 @@
 import pymysql
 # import server.main as server
-import key as key
+import key_de as key
 
 class Database:
     def __init__(self):
