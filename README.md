@@ -6,6 +6,8 @@
 - 바로 clone하지 않고 testcase 디렉토리 생성해서 clone
   - 추후 더 좋은 방안 조사 필요
 - 완료 후 notion에 작성한 CI/CD 포트폴리오 수정
+- 디렉토리 만들고 다시 그 파이프라인을 타면 이미 디렉토리가 있다는 error 발생
+  - 예외처리 필요
 
 2. 유닛 테스트용 Test Script 추가
 - 대상 : Query.py, main.py (db.py 제외)
