@@ -81,10 +81,10 @@
 | query.input_2    | string | Mandatory | input_2 : (string)  |
 | query.input_3    | string | Mandatory | input_3 : (string)  |
 | query.input_4    | boolean| Mandatory | input_4 : (int)   |
-| query.create_data| time   | Mandatory | create_data : (string) |
+| query.create_date| time   | Mandatory | create_date : (string) |
 
 - **Output**
-- string (SQL) : "SELECT * FROM new_db.item where idx = [idx];"
+- string (SQL) : "INSERT INTO item (input_1, input_2, input_3, input_4, create_date) VALUES('[input_1]', '[input_2]', '[input_3]', '[input_4]', '[create_date]');"
 
 ## post_update
 - **Input**
@@ -96,11 +96,11 @@
 | query.input_2    | string | Mandatory | input_2 : (string)  |
 | query.input_3    | string | Mandatory | input_3 : (string)  |
 | query.input_4    | boolean| Mandatory | input_4 : (int)   |
-| query.update_data| time   | Mandatory | update_data : (string) |
+| query.update_date| time   | Mandatory | update_date : (string) |
 | query.idx        | int    | Mandatory | idx : (int) |
 
 - **Output**
-- string (SQL) : "UPDATE item SET input_1=[input_1], input_2='[input_2]', input_3='[input_3]', input_4=[input_4], update_date='[update_data]' WHERE idx = [idx];"
+- string (SQL) : "UPDATE item SET input_1=[input_1], input_2='[input_2]', input_3='[input_3]', input_4=[input_4], update_date='[update_date]' WHERE idx = [idx];"
 
 ## delete_delete
 - **Input**
