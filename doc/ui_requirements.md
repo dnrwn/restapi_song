@@ -8,7 +8,7 @@
 - [5](#5) : Insert tab 선택 화면
   - [5-1](#5-1) : Insert 결과 화면
 - [6](#6) : Select tab 선택 화면
-  - [6-1[](#6-1) : Select 결과 화면
+  - [6-1](#6-1) : Select 결과 화면
 
 ### 1
 ![1](https://github.com/user-attachments/assets/cd8f7eee-9245-4a5f-86ab-e1ca07727c1b)
