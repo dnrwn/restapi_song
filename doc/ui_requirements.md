@@ -4,7 +4,7 @@
 - [3](#3) : Insert tab 선택 화면
   - [3-1](#3-1) : Insert 결과 화면
 - [4](#4) : Select tab 선택 화면
-  - [4-1[](#4-1) : Select 결과 화면
+  - [4-1](#4-1) : Select 결과 화면
 - [5](#5) : Insert tab 선택 화면
   - [5-1](#5-1) : Insert 결과 화면
 - [6](#6) : Select tab 선택 화면
