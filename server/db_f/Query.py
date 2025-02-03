@@ -27,7 +27,7 @@ def post_insert(query):
 
 
 def post_update(query):
-    return ("UPDATE item SET input_1='%d', input_2='%s', input_3='%s', input_4='%d', update_date='%s' WHERE idx = %d;"
+    return ("UPDATE item SET input_1=%d, input_2='%s', input_3='%s', input_4=%d, update_date='%s' WHERE idx = %d;"
             % (
                 query['input_1'],
                 query.get('input_2'),  # get parameter 공란 = None

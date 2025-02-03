@@ -58,7 +58,7 @@ def route_func_2():
 def route_func_3():
     return logic_insert(request)
 
-@server.route('/func_3', methods=['POST', 'DELETE'])
+@server.route('/func_4', methods=['POST', 'DELETE'])
 def route_func_4():
     return logic_delete(request)
 
