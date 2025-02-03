@@ -51,7 +51,7 @@
   - submit 버튼 선택한 시점을 update_date로 DB에 저장
 
 ## 5-1
-
+![5-1](https://github.com/user-attachments/assets/497a0cdc-b7fa-47ef-8da3-a62e3919d96a)
 - Update 실행에 대한 Response 출력
 
 
@@ -65,5 +65,5 @@
   - DB에서 index로 입력한 data 삭제
 
 ## 6-1
-
+![6-1](https://github.com/user-attachments/assets/47237cfd-2142-4839-96be-e77c335357f9)
 - Delete 실행에 대한 Response 출력
