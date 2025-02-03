@@ -1,5 +1,5 @@
 
-# db.py Unit Test용 요구사항
+# db.py, Query.py Unit Test용 요구사항
 
 ## 목차
 - [Database](#__init__)
@@ -10,33 +10,22 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| a         | int    | Mandatory | 0, 1, else     |
-| b         | string | Optional  | default = None |
-| c         | string | Optional  | default= None  |
-
+| host         | -    | Mandatory | 1. IP : (string) </br>2. user : (string) </br> 3. password : (string) </br> 4. charset : (string) </br> 5. port : (init)    |
 - **Output**
-
-| Field        | Type   | Description                                                                                                                                                                                   |
-|--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
-
+- 결과 : database와 통신할 수 있는 환경 조성
 
 ## execute
 
 - **Input**
-
+- 조건: __init__을 통해 DB Connect 가능한 상태
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| -         | -      | -         | -              |
+| query         | string (SQL)     |   Mandatory       | Query.py 참조              |
 
 - **Output**
-
-| Field        | Type   | Description                                                                                                                                                                                   |
-|--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+- 결과 : select * from database_name.table_name; 과 같음
++-----+---------+---------+---------+---------+-------------------+-------------+
+| idx | input_1 | input_2 | input_3 | input_4 | Create_date       | Update_date |
++-----+---------+---------+---------+---------+-------------------+-------------+
+|   1 |       1 | 1       | 1       |       1 | 25-02-03 11:38:13 | NULL        |
++-----+---------+---------+---------+---------+-------------------+-------------+
