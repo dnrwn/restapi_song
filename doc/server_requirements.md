@@ -1,4 +1,4 @@
-# 요구사항 문서
+# main.py Unit Test용 요구사항
 
 ## 목차
 - [Common](#common)
@@ -46,16 +46,14 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| -         | -      | -         | -              |
+| rule  | string      |   Mandatory       | rule : '/'              |
+| method  | stirng      |   Mandatory       | methods = 'GET'         |
 
 - **Output**
 
-| Field        | Type   | Description                                                                                                                                                                                   |
+| Field        | Type   | Description|
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+| Return       | - |  - Dicrect Request : Insert, Select, Update, Delete 하이퍼링크 제공 </br>- UI 하이퍼링크 제공 | 
 
 ## route_ui
 
@@ -63,33 +61,29 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| -         | -      | -         | -              |
+| rule  | string      |   Mandatory       | rule : '/ui'              |
+| method  | stirng      |   Optional       | methods 무관      |
 
 - **Output**
 
-| Field        | Type   | Description                                                                                                                                                                                   |
+| Field        | Type   | Description|
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+| Return       | - |  UI App 실행 | 
 
 ## route_func_1
 
 - **Input**
 
-| Parameter | Type   | Required  | Description |
-|-----------|--------|-----------|-------------|
-| idx       | int    | Mandatory | index value |
+| Parameter | Type   | Required  | Description    |
+|-----------|--------|-----------|----------------|
+| rule  | string      |   Mandatory       | rule : '/func_1'              |
+| method  | stirng      |   Mandatory       | methods = 'GET'         |
 
 - **Output**
 
-| Field        | Type   | Description                                                                                                                                                                                   |
+| Field        | Type   | Description|
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+| Return       | - |  Select Request 실행 | 
 
 ## route_func_2
 
@@ -97,18 +91,14 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| idx       | int    | Mandatory | index value    |
-| input_1   | int    | Mandatory | input value 1  |
-| input_4   | int    | Mandatory | input value 4  |
+| rule  | string      |   Mandatory       | rule : '/func_2'              |
+| method  | stirng      |   Mandatory       | methods = 'POST'         |
 
 - **Output**
 
-| Field        | Type   | Description                                                                                                                                                                                   |
+| Field        | Type   | Description|
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+| Return       | - |  Update Request 실행 | 
 
 ## route_func_3
 
@@ -116,17 +106,14 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| input_1   | int    | Mandatory | input value 1  |
-| input_4   | int    | Mandatory | input value 4  |
+| rule  | string      |   Mandatory       | rule : '/func_3'              |
+| method  | stirng      |   Mandatory       | methods = 'POST'         |
 
 - **Output**
 
-| Field        | Type   | Description                                                                                                                                                                                   |
+| Field        | Type   | Description|
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+| Return       | - |  Insert Request 실행 | 
 
 ## route_func_4
 
@@ -134,16 +121,14 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| idx       | int    | Mandatory | index value    |
+| rule  | string      |   Mandatory       | rule : '/func_1'              |
+| method  | stirng      |   Mandatory       | methods = 'POST', 'DELETE'         |
 
 - **Output**
 
-| Field        | Type   | Description                                                                                                                                                                                   |
+| Field        | Type   | Description|
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+| Return       | - |  Delete Request 실행 | 
 
 # Logic
 
@@ -153,16 +138,13 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| -         | -      | -         | -              |
+| route_data         | string      |    Mandatory      | IP, Port 구조 </br> -1.1.1.1:99              |
 
 - **Output**
 
-| Field        | Type   | Description                                                                                                                                                                                   |
+| Field        | Type   | Description|
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+| Return       | - |  [route_default](#route_default)와 동일 | 
 
 ## logic_ui
 
@@ -170,33 +152,28 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| -         | -      | -         | -              |
+| route_data         | string      |    Optional      | App File Name </br> - Default : test_test.html              |
 
 - **Output**
 
-| Field        | Type   | Description                                                                                                                                                                                   |
+| Field        | Type   | Description|
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+| Return       | - |  [route_ui](#route_ui)와 동일 | 
+
 
 ## logic_select
 
 - **Input**
 
-| Parameter | Type   | Required  | Description |
-|-----------|--------|-----------|-------------|
-| idx       | int    | Mandatory | index value |
+| Parameter | Type   | Required  | Description    |
+|-----------|--------|-----------|----------------|
+| route_data         | dcit      |    Mandatory      | idx : (int) |
 
 - **Output**
 
-| Field        | Type   | Description                                                                                                                                                                                   |
+| Field        | Type   | Description|
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+| Return       | - |  [route_select](#route_select)와 동일 | 
 
 ## logic_update
 
@@ -204,36 +181,28 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| idx       | int    | Mandatory | index value    |
-| input_1   | int    | Mandatory | input value 1  |
-| input_4   | int    | Mandatory | input value 4  |
+| route_data         | dcit      |    Mandatory      | 1. form data </br> - idx: (int)</br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool)  </br> 2. json </br> - idx : (int)</br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool) |
 
 - **Output**
 
-| Field        | Type   | Description                                                                                                                                                                                   |
+| Field        | Type   | Description|
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+| Return       | - |  [route_update](#route_update)와 동일 | 
 
 ## logic_insert
+
 
 - **Input**
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| input_1   | int    | Mandatory | input value 1  |
-| input_4   | int    | Mandatory | input value 4  |
+| route_data         | dcit      |    Mandatory      | 1. form data </br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool)  </br> 2. json </br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool) |
 
 - **Output**
 
-| Field        | Type   | Description                                                                                                                                                                                   |
+| Field        | Type   | Description|
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+| Return       | - |  [route_insert](#route_insert)와 동일 | 
 
 ## logic_delete
 
@@ -241,13 +210,10 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| idx       | int    | Mandatory | index value    |
+| route_data         | dcit      |    Mandatory      | 1. POST, form data </br> - idx : (int) </br> 2. DELETE, json </br> - idx : (int) |
 
 - **Output**
 
-| Field        | Type   | Description                                                                                                                                                                                   |
+| Field        | Type   | Description|
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Result       | String | - (a = 1) PASS </br> - (a = 0) NG </br> - (a = else) Error </br>                                                                                                                               |
-| Description  | String | - NG : [b] NG </br> - Error : Null                                                                                                                                                            |
-| Message      | String | - c                                                                                                                                                                                           |
-| Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
+| Return       | - |  [route_delete](#route_delete)와 동일 | 
