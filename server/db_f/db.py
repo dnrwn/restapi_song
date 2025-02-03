@@ -1,5 +1,5 @@
 import pymysql
-import server.main as server
+# import server.main as server
 import key as key
 
 class Database:
@@ -11,10 +11,10 @@ class Database:
                                   charset='utf8',
                                   port=key.d['port'])
         self.cursor = self.db.cursor(pymysql.cursors.DictCursor)
-        server.server.logger.info('DB connect')
+        # server.server.logger.info('DB connect')
 
     def execute(self, query, args=None):
-        server.server.ogger.info('DB EXECUTE')
+        # server.server.ogger.info('DB EXECUTE')
         if args is None:
             args = {}
         self.cursor.execute(query, args)
