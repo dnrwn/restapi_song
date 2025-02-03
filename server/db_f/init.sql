@@ -1,7 +1,4 @@
 CREATE DATABASE IF NOT EXISTS new_db;
---USE mysql;
---UPDATE user SET authentication_string = PASSWORD('qwer1234') WHERE User = 'root';
---FLUSH PRIVILEGES;
 USE new_db;
 CREATE TABLE IF NOT EXISTS item (
     idx int(2) NOT NULL AUTO_INCREMENT PRIMARY KEY,

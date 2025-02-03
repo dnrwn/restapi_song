@@ -83,6 +83,12 @@
 7. requirements.txt에 추가 모듈 삽입
 - cryptography.fernet==1.0.1
 
+8. db passwork 생성 주석 처리 후 삭제
+- 주석 인식 안됨
+- --USE mysql;
+- --UPDATE user SET authentication_string = PASSWORD('qwer1234') WHERE User = 'root';
+- --FLUSH PRIVILEGES;
+
 2025-02-03 업데이트
 1. main.py
 - 유닛 테스트, 통합 테스트의 효과를 확인하기 위해 구조 변경
