@@ -57,7 +57,7 @@ Result ok 수정 필요 -> PASS
 | Message     | String | - NG : Exception Message                                                                                                                                                                      |
 | Data        | String | - OK : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : int </br> }] |
 
-4. Delete // DELETE
+4. Delete // Method : DELETE
 - input
 
 | Parameter | type |Required| Description   |
