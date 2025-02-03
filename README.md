@@ -1,22 +1,57 @@
-젠킨스 재구축12
+젠킨스 재구축
 
 예정
-1. Jenkins CI/CD 구축
-- clone, test, deploy (build는 python 환경에서 필요 없어서 추후 c++, java 로 진행 예정) [완료]
-- test의 경우 어떤 방식으로 운영할지 검토 필요
-  - Jenkins > 자동 테스트 수행
-- 배포 > deploy 절차로 docker에 dev server 구축해서 매뉴얼 테스트 환경 구성 [완료]
-- 배포 > release 절차로 매뉴얼 테스트 완료 시 docker에 수동으로 배포하는 Job 구성
-- CI/CD 구축 과정들 Notion에 정리 (구축 과정, pipeline 운영법, 이슈 및 얻은 지식 등)
-- Jenkins job : restapi, testscript, jenkins_C (restapi run, testscript run), jenkins_D (docker 배포), jenkins_E (docker 배포 / Release server)
-  - jenkins_C에서 restapi, testscript 워크스페이스를 공유 받아서 작업을 수행하는데, pipeline에 절대 경로로 작성하였으나 가독성 및 보안 이슈로 인해 수정 필요
+1. jenkins job 수정
+- github_testscript > restapi workspace와 병합하는 방식으로
+- 바로 clone하지 않고 testcase 디렉토리 생성해서 clone
+  - 추후 더 좋은 방안 조사 필요
+- 완료 후 notion에 작성한 CI/CD 포트폴리오 수정
 
-2. 파일 정리
+2. 유닛 테스트용 Test Script 추가
+- 대상 : Query.py, main.py (db.py 제외)
+  - 유닛 테스트의 경우 server를 통하지 않고 직접 소스에 접근하는 개념으로 하기 때문에 db return을 만들어서 테스트하기엔 db에 대한 숙련도가 낮아서 소요 시간이 긺
+
+3. 새로 작성한 요구사항을 기준으로 기존에 설계한 test script도 정리 필요
+- excel_read, Selenium, postman
+
+4. Jenkins CI/CD 구축
+- clone, test, deploy (build는 python 환경에서 필요 없어서 추후 c++, java 로 진행 예정) [완료]
+- test의 경우 어떤 방식으로 운영할지 검토 필요 [완료]
+  - 유닛테스트, 통합테스트, 셀레늄
+- 배포 > deploy 절차로 docker에 dev server 구축해서 매뉴얼 테스트 환경 구성 [완료]
+- 배포 > release 절차로 매뉴얼 테스트 완료 시 docker에 수동으로 배포하는 Job 구성 [완료]
+- CI/CD 구축 과정들 Notion에 정리 (구축 과정, pipeline 운영법, 이슈 및 얻은 지식 등) [부분 완료]
+  - Jenkins job : restapi, testscript, jenkins_C (restapi run, testscript run), jenkins_D (docker 배포), jenkins_E (docker 배포 / Release server)
+    - jenkins_C에서 restapi, testscript 워크스페이스를 공유 받아서 작업을 수행하는데, pipeline에 절대 경로로 작성하였으나 유지보수 및 보안 이슈로 인해 수정 필요
+
+5. 파일 정리
 - README 파일 정리 검토 (P2)
   - 내용 정리, 통합 등 최신화
 - pytest init.py 파일 위치 정리 필요 (P2)
 - 포트폴리오 리뷰.pdf 파일 정리 (P3) # P2건 모두 정리된 이후 수행
-- db.py 재구조화 (P3) # rest api server는 테스트 자동화를 위한 도구이므로 중요도 낮음
+
+6. 초기 mysql 셋업할 때 root 계정 비밀번호 생성하는 code 추가 필요
+- init.sql에 root 계정의 비밀번호가 드러나 있으므로 보안 문제 해결 필요
+
+7. db data 복호화 key / value 파일 관리 방안 검토 필요
+- 현재는 server 내부에서 관리
+- github를 통해 clone하고 다 사용하면 delete 하는 방식을 검토하였으나 추가 검토 필요
+- mysql에 해당 기능이 있으나 조금 더 조사 필요 (mysql transparent data encryption)
+- 암호화 하는 함수를 server에 내장하는건 원본 data를 server에서 가지고 있어야 하기 때문에 암호화하는 의미가 없음
+
+2025-02-04 업데이트
+1. db.py
+- db connect에 필요한 data 암호화/복호화 과정 삽입
+- db 함수 log 삽입
+- db 예외처리 sql로 이관
+
+2. init.sql
+- db, table 없을 경우 create 하는 쿼리 삽입
+- 별도 계정 생성 쿼리 삭제
+- root 계정 비밀번호 설정 쿼리 삽입 (보안 관련 추가 개선 필요)
+
+3. db data 암호화, 복호화에 대한 key, value 파일 추가
+4. db.py 재구조화 (P3) # rest api server는 테스트 자동화를 위한 도구이므로 중요도 낮음 (완료 / docker로 해당 부분 간단히 해결)
     - 현재 : db create, execute 코드만 만 작성되어 있음
     - 변경 : 관리 및 유지보수 측면에서 독립적으로 구동되는 db로 재구조화할 필요 있음
         - db_run.py (예)
@@ -32,6 +67,19 @@
             - mysql, nodjs windows service 컨트롤 script
               - nodejs server를 windows 서비스에 등록하는 script 작성 (bat)
 
+5. 요구사항 정리
+- doc 디렉토리 추가
+- 기존 요구사항 : API_requirements.md
+- db 함수 요구사항 : db_requirements.md
+- main 함수 요구사항 : server_requirements.md
+- ui 요구사항 : ui_requirements.md
+
+6. jenkins job 수정
+- workspace에 바로 clone 하지 않고 restapi 디렉토리 추가해서 clone (github_restapi)
+- 현재 숙련도로썬 유닛테스트용 케이스를 소스에 직접 사용하는게 용이함 (추후 다른 방법 조사)
+
+7. requirements.txt에 추가 모듈 삽입
+- cryptography.fernet==1.0.1
 
 2025-02-03 업데이트
 1. main.py
