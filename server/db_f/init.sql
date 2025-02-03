@@ -1,8 +1,8 @@
 CREATE DATABASE IF NOT EXISTS new_db;
 
-USE mysql;
-UPDATE user SET authentication_string = PASSWORD('qwer1234') WHERE User = 'root';
-FLUSH PRIVILEGES;
+--USE mysql;
+--UPDATE user SET authentication_string = PASSWORD('qwer1234') WHERE User = 'root';
+--FLUSH PRIVILEGES;
 
 USE new_db;
 
