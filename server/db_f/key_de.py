@@ -15,11 +15,11 @@ def decrypt(key, value):
 
 
 def key_read():
-    with open('db_f/key', 'rb') as file:
+    with open('server/db_f/key', 'rb') as file:
         return file.read()
 
 def value_read():
-    with open('db_f/value', 'r', encoding='utf-8') as file:
+    with open('server/db_f/value', 'r', encoding='utf-8') as file:
         return file.read()
 
 
