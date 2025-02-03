@@ -32,6 +32,13 @@
             - mysql, nodjs windows service 컨트롤 script
               - nodejs server를 windows 서비스에 등록하는 script 작성 (bat)
 
+
+2025-02-03 업데이트
+1. main.py
+- 유닛 테스트, 통합 테스트의 효과를 확인하기 위해 구조 변경
+  - Route 함수와 Logic 함수 분리
+  - Select, Update 가 한 함수에서 if로 관리되던 것을 각각의 함수로 분리 (html 수정 포함)
+
 2025-01-30 업데이트
 1. 리포지토리 브랜치 이름 변경
 - 이슈 : github에서 webhook 로그가 정상 (200) 으로 보내지고 jenkins에서 hook log가 출력되는데 파이프라인 트리거가 되질 않음

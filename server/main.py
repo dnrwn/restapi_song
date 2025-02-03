@@ -4,17 +4,21 @@ from flask import Flask, request, render_template
 import db_f.Query as Query
 import db_f.db as db
 
+
+########## Common func ##########
 server = Flask(__name__)
 
+# IP, PORT, PATH 정보 read
 config = configparser.ConfigParser()
 config.read('server/config.ini')
 path = config['server']['directory']
 
-# console log 수집 script
+# console log 수집 form 정의
 time = datetime.datetime.now().strftime('%y%m%d_%H%M%S')
 logging.basicConfig(filename=f'{path}log/server_{time}.log', level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
+# Response form 정의
 def response(a, b=None, c=None):
     if a == 0:
         return {
@@ -33,9 +37,35 @@ def response(a, b=None, c=None):
         }
 
 
+########## Route func ##########
 @server.route('/', methods=['GET'])
-def default():
-    server.logger.info(default.__name__)
+def route_default():
+    return logic_default()
+
+@server.route('/ui')
+def route_ui():
+    return logic_ui()
+
+@server.route('/func_1', methods=['GET'])
+def route_func_1():
+    return logic_select(request)
+
+@server.route('/func_2', methods=['POST'])
+def route_func_2():
+    return logic_update(request)
+
+@server.route('/func_3', methods=['POST'])
+def route_func_3():
+    return logic_insert(request)
+
+@server.route('/func_3', methods=['POST', 'DELETE'])
+def route_func_4():
+    return logic_delete(request)
+
+
+########## Logic func ##########
+def logic_default():
+    server.logger.info(logic_default.__name__)
     ip_1 = request.host.split(':')[0]
     po_1 = request.host.split(':')[1]
     a = (f'<p><a href="http://{ip_1}:{po_1}/func_1" methods="POST"> Select Update </a></p>'
@@ -44,59 +74,53 @@ def default():
          f'<p><a href="http://{ip_1}:{po_1}/ui" > web app </a></p>')
     return a
 
-
-@server.route('/ui')
-def ui():
-    server.logger.info(ui.__name__)
+def logic_ui(): # 기본 UI
+    server.logger.info(logic_ui.__name__)
     return render_template('test_test.html')
 
 
-# DB 연동 기능 : Select, Update
-@server.route('/func_1', methods=['GET', 'POST'])
-def func_1():
-    server.logger.info(func_1.__name__)
-    if request.method == 'GET':
-        try:
-            val = int(request.values.get('idx'))
-            a = response(1)
-            a['data'] = db.Database.execute(Query.get_select_one(val))
-            return a
-
-        except Exception as m:
-            server.logger.info(traceback.format_exc())
-            return response(0, 'Select', c=str(m))
-
-    elif request.method == 'POST':
-        try:
-            if len(request.form) != 0:
-                val = request.form.to_dict()
-                val['idx'] = int(val['idx'])
-                val['input_1'] = int(val['input_1'])
-                val['input_4'] = int(val['input_4'])
-            else:
-                val = request.get_json()
-            db.Database.execute(Query.get_select_one(int(val['idx'])))
-            db.Database.execute(Query.post_update(val))
-            a = db.Database.execute(Query.get_select_one(int(val['idx'])))
-            b = response(1)
-            b['data'] = a
-            return a
-
-        except Exception as m:
-            server.logger.info(traceback.format_exc())
-            return response(0, 'Update', c=str(m))
-
-# DB 연동 기능 : insert
-@server.route('/func_2', methods=['POST'])
-def func_2():
+def logic_select(route_data): # Select
+    server.logger.info(logic_select.__name__)
     try:
-        server.logger.info(func_2.__name__)
-        if len(request.form) != 0:
-            val = request.form.to_dict()
+        val = int(route_data.values.get('idx'))
+        a = response(1)
+        a['data'] = db.Database.execute(Query.get_select_one(val))
+        return a
+
+    except Exception as m:
+        server.logger.info(traceback.format_exc())
+        return response(0, 'Select', c=str(m))
+
+def logic_update(route_data): # Update
+    server.logger.info(logic_update.__name__)
+    try:
+        if len(route_data.form) != 0:
+            val = route_data.form.to_dict()
+            val['idx'] = int(val['idx'])
             val['input_1'] = int(val['input_1'])
             val['input_4'] = int(val['input_4'])
         else:
-            val = request.get_json()
+            val = route_data.get_json()
+        db.Database.execute(Query.get_select_one(int(val['idx'])))
+        db.Database.execute(Query.post_update(val))
+        a = db.Database.execute(Query.get_select_one(int(val['idx'])))
+        b = response(1)
+        b['data'] = a
+        return a
+
+    except Exception as m:
+        server.logger.info(traceback.format_exc())
+        return response(0, 'Update', c=str(m))
+
+def logic_insert(route_data): # Insert
+    server.logger.info(logic_insert.__name__)
+    try:
+        if len(route_data.form) != 0:
+            val = route_data.form.to_dict()
+            val['input_1'] = int(val['input_1'])
+            val['input_4'] = int(val['input_4'])
+        else:
+            val = route_data.get_json()
 
         db.Database.execute(Query.post_insert(val))
         a = db.Database.execute(Query.get_select_all())
@@ -108,16 +132,13 @@ def func_2():
         server.logger.info(traceback.format_exc())
         return response(0, 'Insert', c=str(m))
 
-
-# DB 연동 기능 : Delete
-@server.route('/func_3', methods=['POST', 'DELETE'])
-def func_3():
+def logic_delete(route_data): # Delete
+    server.logger.info(logic_delete.__name__)
     try:
-        server.logger.info(func_3.__name__)
-        if len(request.form) != 0 and request.method == 'POST':
-            val = int(request.form['idx'])
+        if len(route_data.form) != 0 and route_data.method == 'POST':
+            val = int(route_data.form['idx'])
         else:
-            val = int(request.values.get('idx'))
+            val = int(route_data.values.get('idx'))
         db.Database.execute(Query.delete_delete(val))
         a = response(1)
         a['idx'] = val
