@@ -41,6 +41,12 @@
 - mysql에 해당 기능이 있으나 조금 더 조사 필요 (mysql transparent data encryption)
 - 암호화 하는 함수를 server에 내장하는건 원본 data를 server에서 가지고 있어야 하기 때문에 암호화하는 의미가 없음
 
+8. db 쪽 로그 import 문제 있음
+- main.py 기준으로 자기를 import 못함
+  - 경로 문제인지, 상호 참조 문제인지 검토 필요
+  - db 쪽도 Logger를 main과 이 사용하길 원함함
+  - 안되면 db용 logging 코드 추가 필요
+
 2025-02-04 업데이트
 1. db.py
 - db connect에 필요한 data 암호화/복호화 과정 삽입
