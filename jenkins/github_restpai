@@ -1,11 +1,13 @@
 pipeline {
     agent any
 
+    // docker 환경 변수 선언
     environment {
         DOCKER_HUB_CREDENTIALS = credentials('Docker_ID')
     }
 
     stages {
+        // github > test branch Clone
         stage('Restapi_Server_Test / Clone Repository') {
             steps {
                 script {
@@ -14,12 +16,13 @@ pipeline {
                     echo dirPath
                     bat "if not exist \"${dirPath}\" mkdir \"${dirPath}\""
                     dir ('restapi') {
-                        git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'master'
+                        git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'test'
                     }
-                    // git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'master'
+                    // git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'test'
                 }
             }
         }
+        // jenkins workspace > docker build
         stage('Restapi_Server_Deploy / Docker Login and Build/Deploy') {
             steps {
                 script {
@@ -31,6 +34,7 @@ pipeline {
                     bat "echo ${dockerPass} | docker login -u ${dockerUser} --password-stdin"
                     
                     echo 'Building and deploying with Docker Compose...'
+                    // rest api server와 test script를 한 workspace에서 병합하기 위함
                     dir ('restapi') {
                         bat 'docker-compose down'
                         bat 'docker-compose up --build -d'
