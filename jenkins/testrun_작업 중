@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clone Workspaces') {
+            steps {
+                script {
+                    ws('/ProgramData/Jenkins/.jenkins/workspace/github_testscript') {
+                        echo 'Processing github_testscript workspace...'
+                        // bat 'dir'
+                        bat 'pip install -r requirements.txt'
+                        // bat 'python excel_read/event.py'
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'This will always run'
+        }
+        success {
+            echo 'Test Script Run Succeeded.'
+            build job: 'jenkins_deploy'
+        }
+        failure {
+            echo 'Test Script Run Failed.'
+        }
+    }
+}
