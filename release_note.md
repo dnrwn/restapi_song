@@ -3,6 +3,10 @@
 - [업데이트](#업데이트)
 
 # 예정
+## 0. Jenkins Pipeline 수정
+- scm 형태로 변경 (pipeline 공유를 위함)
+- jenkins 디렉토리에서 pipeline file 관리
+
 ## 1. Jenkins Job 수정
 - `github_testscript`를 `restapi workspace`와 병합하는 방식으로 수정
 - 바로 clone하지 않고 `testcase` 디렉토리 생성 후 clone
