@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_HUB_CREDENTIALS = credentials('Docker_ID')
+    }
+
+    stages {
+        stage('Restapi_Server_Test / Clone Repository') {
+            steps {
+                script {
+                    echo 'Cloning repository...'
+                    def dirPath = 'restapi'
+                    echo dirPath
+                    bat "if not exist \"${dirPath}\" mkdir \"${dirPath}\""
+                    dir ('restapi') {
+                        git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'master'
+                    }
+                    // git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'master'
+                }
+            }
+        }
+        stage('Restapi_Server_Deploy / Docker Login and Build/Deploy') {
+            steps {
+                script {
+                    // 환경 변수를 변수에 저장
+                    def dockerUser = DOCKER_HUB_CREDENTIALS_USR
+                    def dockerPass = DOCKER_HUB_CREDENTIALS_PSW
+
+                    echo 'Logging in to Docker Hub...'
+                    bat "echo ${dockerPass} | docker login -u ${dockerUser} --password-stdin"
+                    
+                    echo 'Building and deploying with Docker Compose...'
+                    dir ('restapi') {
+                        bat 'docker-compose down'
+                        bat 'docker-compose up --build -d'
+                    }
+                    build job: 'jenkins_test'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'This will always run'
+        }
+        success {
+            echo 'Rest Api Server Clone Succeeded. Jenkins test job triggered.'
+        }
+        failure {
+            echo 'API Server Clone Failed. Jenkins test job did not run.'
+        }
+    }
+}
