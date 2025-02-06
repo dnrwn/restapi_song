@@ -30,16 +30,15 @@ pipeline {
             }
         }
     }
-
     post {
         always {
-            echo 'This will always run'
+            echo 'test branch build job'
         }
         success {
-            echo 'Rest Api Server Clone Succeeded. Jenkins test job triggered.'
+            echo 'test branch build Succeeded.'
         }
         failure {
-            echo 'API Server Clone Failed. Jenkins test job did not run.'
+            echo 'test branch build Failed.'
         }
     }
 }

@@ -16,20 +16,16 @@ pipeline {
                     dir (RESTAPI_DIR) {
                         git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'dev'
                     }
-                    // git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'dev'
                 }
             }
         }
-        stage('unittest_song / Clone / Run'){
+        stage('unittest_song / Clone'){
             steps{
                 script{
                     echo 'unittest_song Clone...'
                     bat "if not exist \"${UNITTEST_DIR}\" mkdir \"${UNITTEST_DIR}\""
                     dir (UNITTEST_DIR) {
                         git url: 'https://github.com/dnrwn/unitest_song.git', branch: 'master'
-
-                        echo 'unittest_song Run...'
-                        bat 'python test.py'
                     }
 
                 }
@@ -53,18 +49,30 @@ pipeline {
                 }
             }
         }
-    }
+        stage('unittest_song / Run'){
+            steps{
+                script{
+                    echo 'unittest_song Run...'
+                    dir (UNITTEST_DIR) {
+                        echo 'unittest_song Run...'
+                        bat 'python test.py'
+                    }
 
+                }
+            }
+        }
+    }
     post {
         always {
-            echo 'This will always run'
+            echo 'dev branch build job'
         }
         success {
-            echo 'Rest Api Server Clone Succeeded. Jenkins test job triggered.'
+            echo 'dev branch build Succeeded.'
             build job: 'Test Run'
+            echo 'Jenkins Test Run triggered.'
         }
         failure {
-            echo 'API Server Clone Failed. Jenkins test job did not run.'
+            echo 'dev branch build Failed. Jenkins test job did not run.'
         }
     }
 }

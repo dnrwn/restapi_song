@@ -8,7 +8,6 @@ pipeline {
                 git branch: 'dev', url: 'https://github.com/restapi_song.git'
             }
         }
-
         stage('Merge to Test') {
             steps {
                 // Git 설정 및 dev 브랜치의 변경사항을 test 브랜치에 병합
@@ -22,6 +21,17 @@ pipeline {
                     '''
                 }
             }
+        }
+    }
+    post {
+        always {
+            echo 'test branch update job'
+        }
+        success {
+            echo 'test branch build Succeeded.'
+        }
+        failure {
+            echo 'test branch update Failed.'
         }
     }
 }
