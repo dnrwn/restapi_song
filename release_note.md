@@ -3,51 +3,29 @@
 - [업데이트](#업데이트)
 
 # 예정
-## 0. Jenkins Pipeline 수정
-- scm 형태로 변경 (pipeline 공유를 위함)
-- jenkins 디렉토리에서 pipeline file 관리
-
-## 1. Jenkins Job 수정
-- `github_testscript`를 `restapi workspace`와 병합하는 방식으로 수정
-- 바로 clone하지 않고 `testcase` 디렉토리 생성 후 clone
-  - 추후 더 좋은 방안 조사 필요
-- 완료 후 `Notion`에 작성한 CI/CD 포트폴리오 수정
-- 디렉토리 만들고 다시 그 파이프라인을 타면 이미 디렉토리가 있다는 error 발생
-  - 예외처리 필요
-
-## 2. 유닛 테스트용 Test Script 추가
+## 1. 유닛 테스트용 Test Script 추가
 - 대상: `Query.py`, `main.py` (`db.py` 제외)
   - 유닛 테스트의 경우 server를 통하지 않고 직접 소스에 접근하는 개념으로 하기 때문에 `db return`을 만들어서 테스트하기엔 db에 대한 숙련도가 낮아서 소요 시간이 길어짐
 
-## 3. 새로 작성한 요구사항을 기준으로 기존에 설계한 Test Script도 정리 필요
+## 2. 새로 작성한 요구사항을 기준으로 기존에 설계한 Test Script도 정리 필요
 - `excel_read`, `Selenium`, `Postman`
 
-## 4. Jenkins CI/CD 구축
-- `clone`, `test`, `deploy` (build는 Python 환경에서 필요 없어서 추후 C++, Java로 진행 예정) **[완료]**
-- test의 경우 어떤 방식으로 운영할지 검토 필요 **[완료]**
-  - 유닛테스트, 통합테스트, 셀레늄
-- 배포 > `deploy` 절차로 Docker에 dev server 구축해서 매뉴얼 테스트 환경 구성 **[완료]**
-- 배포 > `release` 절차로 매뉴얼 테스트 완료 시 Docker에 수동으로 배포하는 Job 구성 **[완료]**
-- CI/CD 구축 과정들 `Notion`에 정리 (구축 과정, pipeline 운영법, 이슈 및 얻은 지식 등) **[부분 완료]**
-  - Jenkins job: `restapi`, `testscript`, `jenkins_C` (restapi run, testscript run), `jenkins_D` (Docker 배포), `jenkins_E` (Docker 배포 / Release server)
-    - `jenkins_C`에서 `restapi`, `testscript` 워크스페이스를 공유 받아서 작업을 수행하는데, pipeline에 절대 경로로 작성하였으나 유지보수 및 보안 이슈로 인해 수정 필요
-
-## 5. 파일 정리
+## 3. 파일 정리
 - `README` 파일 정리 검토 (P2)
   - 내용 정리, 통합 등 최신화
 - `pytest init.py` 파일 위치 정리 필요 (P2)
 - `포트폴리오 리뷰.pdf` 파일 정리 (P3) # P2건 모두 정리된 이후 수행
 
-## 6. 초기 MySQL 셋업할 때 root 계정 비밀번호 생성하는 코드 추가 필요
+## 4. 초기 MySQL 셋업할 때 root 계정 비밀번호 생성하는 코드 추가 필요
 - `init.sql`에 root 계정의 비밀번호가 드러나 있으므로 보안 문제 해결 필요
 
-## 7. DB Data 복호화 Key / Value 파일 관리 방안 검토 필요
+## 5. DB Data 복호화 Key / Value 파일 관리 방안 검토 필요
 - 현재는 Server 내부에서 관리
 - Github를 통해 clone하고 다 사용하면 delete하는 방식을 검토하였으나 추가 검토 필요
 - MySQL에 해당 기능이 있으나 조금 더 조사 필요 (`MySQL Transparent Data Encryption`)
 - 암호화 하는 함수를 Server에 내장하는 건 원본 data를 Server에서 가지고 있어야 하기 때문에 암호화하는 의미가 없음
 
-## 8. DB 쪽 로그 Import 문제 있음
+## 6. DB 쪽 로그 Import 문제 있음
 - `main.py` 기준으로 자기를 import 못함
   - 경로 문제인지, 상호 참조 문제인지 검토 필요
   - DB 쪽도 Logger를 main과 공유하여 사용하길 원함
@@ -101,6 +79,28 @@
 - `--USE mysql;`
 - `--UPDATE user SET authentication_string = PASSWORD('qwer1234') WHERE User = 'root';`
 - `--FLUSH PRIVILEGES;`
+
+## 2025-02-06 업데이트
+1. Jenkins Pipeline 수정
+- scm 형태로 변경 (pipeline 공유를 위함)
+- jenkins 디렉토리에서 pipeline file 관리
+
+2. Jenkins Job 수정
+-> dev branch build 때 unittest를 같이 수행하고 testscript는 분리하는 것으로 수정
+- `github_testscript`를 `restapi workspace`와 병합하는 방식으로 수정 
+- 바로 clone하지 않고 `testcase` 디렉토리 생성 후 clone
+  - 추후 더 좋은 방안 조사 필요
+- 완료 후 `Notion`에 작성한 CI/CD 포트폴리오 수정
+- 디렉토리 만들고 다시 그 파이프라인을 타면 이미 디렉토리가 있다는 error 발생
+  - 예외처리 필요
+ 
+3. Jenkins CI/CD 구축
+- `clone`, `test`, `deploy` (build는 Python 환경에서 필요 없어서 추후 C++, Java로 진행 예정) **[완료]**
+- test의 경우 어떤 방식으로 운영할지 검토 필요 **[완료]**
+  - 유닛테스트, 통합테스트, 셀레늄
+- 배포 > `deploy` 절차로 Docker에 dev server 구축해서 매뉴얼 테스트 환경 구성 **[완료]**
+- 배포 > `release` 절차로 매뉴얼 테스트 완료 시 Docker에 수동으로 배포하는 Job 구성 **[완료]**
+- CI/CD 구축 과정들 `Notion`에 정리 (구축 과정, pipeline 운영법, 이슈 및 얻은 지식 등) **[완료]**
 
 ## 2025-02-03 업데이트
 1. `main.py`
