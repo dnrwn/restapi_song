@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // dev 브랜치 체크아웃
+                git branch: 'dev', url: 'https://github.com/restapi_song.git'
+            }
+        }
+
+        stage('Merge to Test') {
+            steps {
+                // Git 설정 및 dev 브랜치의 변경사항을 test 브랜치에 병합
+                withCredentials([usernamePassword(credentialsId: 'Github_ID', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    sh '''
+                        git config user.name "dnrwn"
+                        git config user.email "sskid12@naver.com"
+                        git checkout test
+                        git merge dev
+                        git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dnrwn/restapi_song.git test
+                    '''
+                }
+            }
+        }
+    }
+}

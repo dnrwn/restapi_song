@@ -3,39 +3,53 @@ pipeline {
 
     environment {
         DOCKER_HUB_CREDENTIALS = credentials('Docker_ID')
+        RESTAPI_DIR = 'restapi'
+        UNITTEST_DIR = 'unittest'
     }
 
     stages {
-        stage('Restapi_Server_Test / Clone Repository') {
+        stage('REST API SERVER / dev Branch / Clone') {
             steps {
                 script {
-                    echo 'Cloning repository...'
-                    def dirPath = 'restapi'
-                    echo dirPath
-                    bat "if not exist \"${dirPath}\" mkdir \"${dirPath}\""
-                    dir ('restapi') {
-                        git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'master'
+                    echo 'Dev Branch Clone...'
+                    bat "if not exist \"${RESTAPI_DIR}\" mkdir \"${RESTAPI_DIR}\""
+                    dir (RESTAPI_DIR) {
+                        git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'dev'
                     }
-                    // git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'master'
+                    // git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'dev'
                 }
             }
         }
-        stage('Restapi_Server_Deploy / Docker Login and Build/Deploy') {
+        stage('unittest_song / Clone / Run'){
+            steps{
+                script{
+                    echo 'unittest_song Clone...'
+                    bat "if not exist \"${UNITTEST_DIR}\" mkdir \"${UNITTEST_DIR}\""
+                    dir (UNITTEST_DIR) {
+                        git url: 'https://github.com/dnrwn/unitest_song.git', branch: 'master'
+
+                        echo 'unittest_song Run...'
+                        bat 'python test.py'
+                    }
+
+                }
+            }
+        }
+        stage('REST API SERVER / Dev Branch / Docker build') {
             steps {
                 script {
-                    // 환경 변수를 변수에 저장
-                    def dockerUser = DOCKER_HUB_CREDENTIALS_USR
-                    def dockerPass = DOCKER_HUB_CREDENTIALS_PSW
+                    // docker login user, pw 변수
+                    def dockerUser = env.DOCKER_HUB_CREDENTIALS_USR
+                    def dockerPass = env.DOCKER_HUB_CREDENTIALS_PSW
 
                     echo 'Logging in to Docker Hub...'
                     bat "echo ${dockerPass} | docker login -u ${dockerUser} --password-stdin"
                     
                     echo 'Building and deploying with Docker Compose...'
-                    dir ('restapi') {
+                    dir (RESTAPI_DIR) {
                         bat 'docker-compose down'
                         bat 'docker-compose up --build -d'
                     }
-                    build job: 'jenkins_test'
                 }
             }
         }
@@ -47,6 +61,7 @@ pipeline {
         }
         success {
             echo 'Rest Api Server Clone Succeeded. Jenkins test job triggered.'
+            build job: 'Test Run'
         }
         failure {
             echo 'API Server Clone Failed. Jenkins test job did not run.'
