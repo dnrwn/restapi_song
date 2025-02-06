@@ -1,8 +1,18 @@
 # db.py, Query.py Unit Test용 요구사항
 
 ## 목차
+[Database](#database)
 - [init](#init)
 - [execute](#execute)
+  
+[Query](#Query)
+- [date](#date)
+- [get_select_all](#get_select_all)
+- [get_select_one](#get_select_one)
+- [post_insert](#post_insert)
+- [post_update](#post_update)
+- [delete_delete](#delete_delete)
+
 
 # Database
 
