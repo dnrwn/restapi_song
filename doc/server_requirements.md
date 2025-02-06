@@ -132,7 +132,7 @@
 
 # 3-Logic
 
-## 3-1logic_default
+## 3-1-logic_default
 
 - **Input**
 
