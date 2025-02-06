@@ -46,7 +46,7 @@
 - 참조
   - Query 요구사항에 Table row의 Type length 정보를 제공하지 않는 이유는, server나 db 소스에서 length를 제한하는 코드가 없으므로 mysql 자체의 제한에 의존하기 때문
   - Type (자료형) 자체에 대한 제한은 있음
-- 제약사항 : Table row length에 대한 Test는 다음 쿼리로 의존/대체
+- 제약사항 : Table row length에 대한 요구사항은 다음 쿼리로 의존/대체
   - SHOW COLUMNS FROM new_db.item;
 - 추후 개선 예정
 
