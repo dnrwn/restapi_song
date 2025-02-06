@@ -1,22 +1,22 @@
 # db.py, Query.py Unit Test용 요구사항
 
 ## 목차
-[Database](#database)
-- [init](#init)
-- [execute](#execute)
+[Database](#1-database)
+- [init](#1-1-init)
+- [execute](#1-2-execute)
   
-[Query](#Query)
-- [date](#date)
-- [get_select_all](#get_select_all)
-- [get_select_one](#get_select_one)
-- [post_insert](#post_insert)
-- [post_update](#post_update)
-- [delete_delete](#delete_delete)
+[Query](#2-Query)
+- [date](#2-1-date)
+- [get_select_all](#2-2-get_select_all)
+- [get_select_one](#2-3-get_select_one)
+- [post_insert](#2-4-post_insert)
+- [post_update](#2-5-post_update)
+- [delete_delete](#2-6-delete_delete)
 
 
-# Database
+# 1-Database
 
-## init
+## 1-1-init
 - **Input**
 
 | Parameter | Type   | Required  | Description    |
@@ -26,7 +26,7 @@
 - **Output**
 - 결과 : database와 통신할 수 있는 환경 조성
 
-## execute
+## 1-2-execute
 
 - **Input**
 - 조건: __init__을 통해 DB Connect 가능한 상태
@@ -42,7 +42,7 @@
 |-----|---------|---------|---------|---------|-------------------|-------------|
 | 1   | 1       | 1       | 1       | 1       | 25-02-03 11:38:13 | NULL        |
 
-# Query
+# 2-Query
 - 참조
   - Query 요구사항에 Table row의 Type length 정보를 제공하지 않는 이유는, server나 db 소스에서 length를 제한하는 코드가 없으므로 mysql 자체의 제한에 의존하기 때문
   - Type (자료형) 자체에 대한 제한은 있음
@@ -50,7 +50,7 @@
   - SHOW COLUMNS FROM new_db.item;
 - 추후 개선 예정
 
-## date
+## 2-1-date
 - **Input**
 
 | Parameter | Type | Required | Description |
@@ -60,7 +60,7 @@
 - **Output**
 - Time format : yyyy-mm-dd HH:MM:SS
 
-## get_select_all
+## 2-2-get_select_all
 - **Input**
 
 | Parameter | Type | Required | Description |
@@ -70,7 +70,7 @@
 - **Output**
 - string (SQL) : "SELECT * FROM new_db.item;"
 
-## get_select_one
+## 2-3-get_select_one
 - **Input**
 
 | Parameter | Type | Required | Description |
@@ -81,7 +81,7 @@
 - **Output**
 - string (SQL) : "SELECT * FROM new_db.item where idx = [idx];"
 
-## post_insert
+## 2-4-post_insert
 - **Input**
 
 | Parameter        | Type   | Required | Description       |
@@ -96,7 +96,7 @@
 - **Output**
 - string (SQL) : "INSERT INTO item (input_1, input_2, input_3, input_4, create_date) VALUES('[input_1]', '[input_2]', '[input_3]', '[input_4]', '[create_date]');"
 
-## post_update
+## 2-5-post_update
 - **Input**
 
 | Parameter        | Type   | Required | Description       |
@@ -112,7 +112,7 @@
 - **Output**
 - string (SQL) : "UPDATE item SET input_1=[input_1], input_2='[input_2]', input_3='[input_3]', input_4=[input_4], update_date='[update_date]' WHERE idx = [idx];"
 
-## delete_delete
+## 2-6-delete_delete
 - **Input**
 
 | Parameter | Type | Required | Description |
