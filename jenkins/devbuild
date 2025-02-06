@@ -26,6 +26,7 @@ pipeline {
                     bat "if not exist \"${UNITTEST_DIR}\" mkdir \"${UNITTEST_DIR}\""
                     dir (UNITTEST_DIR) {
                         git url: 'https://github.com/dnrwn/unitest_song.git', branch: 'master'
+                        bat 'pip install -r requirements.txt' 
                     }
 
                 }
