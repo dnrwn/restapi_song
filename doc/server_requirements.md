@@ -167,7 +167,7 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| route_data         | dcit      |    Mandatory      | idx : (int) |
+| route_data         | dict      |    Mandatory      | idx : (int) |
 
 - **Output**
 
@@ -181,7 +181,7 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| route_data         | dcit      |    Mandatory      | 1- form data </br> - idx: (int)</br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool)  </br> 2- json </br> - idx : (int)</br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool) |
+| route_data         | dict      |    Mandatory      | 1- form data </br> - idx: (int)</br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool)  </br> 2- json </br> - idx : (int)</br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool) |
 
 - **Output**
 
@@ -196,7 +196,7 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| route_data         | dcit      |    Mandatory      | 1- form data </br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool)  </br> 2- json </br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool) |
+| route_data         | dict      |    Mandatory      | 1- form data </br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool)  </br> 2- json </br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool) |
 
 - **Output**
 
@@ -210,7 +210,7 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| route_data         | dcit      |    Mandatory      | 1- POST, form data </br> - idx : (int) </br> 2- DELETE, json </br> - idx : (int) |
+| route_data         | dict      |    Mandatory      | 1- POST, form data </br> - idx : (int) </br> 2- DELETE, json </br> - idx : (int) |
 
 - **Output**
 
