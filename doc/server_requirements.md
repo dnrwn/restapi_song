@@ -121,7 +121,7 @@
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| rule  | string      |   Mandatory       | rule : '/func_1'              |
+| rule  | string      |   Mandatory       | rule : '/func_4'              |
 | method  | stirng      |   Mandatory       | methods = 'POST', 'DELETE'         |
 
 - **Output**
