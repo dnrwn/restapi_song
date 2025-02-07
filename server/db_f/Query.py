@@ -21,7 +21,7 @@ def post_insert(query):
             % (query['input_1'],
                query.get('input_2'),  # get parameter 공란 = None
                query.get('input_3'),  # get parameter 공란 = None
-               query.get('input_4', True),
+               query.get('input_4'),
                date())
             )
 
@@ -32,7 +32,7 @@ def post_update(query):
                 query['input_1'],
                 query.get('input_2'),  # get parameter 공란 = None
                 query.get('input_3'),  # get parameter 공란 = None
-                query.get('input_4', True),
+                query.get('input_4'),
                 date(),
                 query['idx'])
             )

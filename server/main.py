@@ -119,10 +119,9 @@ def logic_insert(route_data): # Insert
         if len(route_data.form) != 0:
             val = route_data.form.to_dict()
             val['input_1'] = int(val['input_1'])
-            val['input_4'] = int(val['input_4'])
+            val['input_4'] = bool(val['input_4'])
         else:
             val = route_data.get_json()
-
         db.Database.execute(Query.post_insert(val))
         a = db.Database.execute(Query.get_select_all())
         b = response(1)
