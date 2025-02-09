@@ -28,7 +28,9 @@ def response(a, b=None, c=None):
         }
     elif a == 1:
         return {
-            "Result": "PASS"
+            "Result": "PASS",
+            "Description": "%s PASS" %b,
+            "Message": c
         }
     else:
         return {
