@@ -29,7 +29,7 @@ def response(a, b=None, c=None):
     elif a == 1:
         return {
             "Result": "PASS",
-            "Description": "%s PASS" %b,
+            "Description": "%s PASS" % b,
             "Message": c
         }
     else:
@@ -85,7 +85,7 @@ def logic_select(route_data): # Select
     server.logger.info(logic_select.__name__)
     try:
         val = int(route_data.values.get('idx'))
-        a = response(1)
+        a = response(1, b='Select')
         a['data'] = db.Database.execute(Query.get_select_one(val))
         return a
 
@@ -107,7 +107,7 @@ def logic_update(route_data): # Update
         db.Database.execute(Query.get_select_one(int(val['idx'])))
         db.Database.execute(Query.post_update(val))
         a = db.Database.execute(Query.get_select_one(int(val['idx'])))
-        b = response(1)
+        b = response(1, 'Update')
         b['data'] = a
         return b
 
@@ -126,7 +126,7 @@ def logic_insert(route_data): # Insert
             val = route_data.get_json()
         db.Database.execute(Query.post_insert(val))
         a = db.Database.execute(Query.get_select_all())
-        b = response(1)
+        b = response(1, 'Insert')
         b['data'] = a[-1]
         return b
 
@@ -142,7 +142,7 @@ def logic_delete(route_data): # Delete
         else:
             val = int(route_data.values.get('idx'))
         db.Database.execute(Query.delete_delete(val))
-        a = response(1)
+        a = response(1, 'Delete')
         a['idx'] = val
         return a
 
@@ -156,4 +156,3 @@ if __name__ == "__main__":
     ip = config['server']['ip']
     port = config['server']['port']
     server.run(host=ip, port=port, debug=True)
-
