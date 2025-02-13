@@ -14,7 +14,7 @@ pipeline {
                         git checkout test
                         git pull restapi_song test
                         git merge dev || (git merge --abort && exit 1)
-                        if git status | findstr /i "conflict"; then
+                        if git status | find /i "conflict"; then
                             echo "Merge conflicts detected. Aborting merge."
                             git merge --abort
                             exit 1
