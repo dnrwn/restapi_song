@@ -75,7 +75,11 @@ pipeline {
         }
         success {
             echo 'dev branch build Succeeded.'
+<<<<<<< HEAD
             build job: 'Test Run' propagate: false
+=======
+            build job: 'Test Run', propagate: false
+>>>>>>> dev
             echo 'Jenkins Test Run triggered.'
         }
         failure {
