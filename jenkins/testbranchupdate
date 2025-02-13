@@ -11,13 +11,13 @@ pipeline {
         stage('Merge to Test') {
             steps {
                 // Git 설정 및 dev 브랜치의 변경사항을 test 브랜치에 병합
-                withCredentials([usernamePassword(credentialsId: 'Github_ID', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    bat '''
+                withCredentials([string(credentialsId: 'Github_PAT', variable: 'GIT_TOKEN')]) {
+                    sh '''
                         git config user.name "dnrwn"
                         git config user.email "sskid12@naver.com"
                         git checkout test
-                        git merge dev || (git merge --abort && exit1)
-                        git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dnrwn/restapi_song.git test
+                        git merge dev || (git merge --abort && exit 1)
+                        git push https://${GIT_TOKEN}@github.com/dnrwn/restapi_song.git test
                     '''
                 }
             }
