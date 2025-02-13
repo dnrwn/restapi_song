@@ -37,10 +37,10 @@ pipeline {
                     dir (UNITTEST_DIR) {
                         echo 'unittest_song Run...'
                         bat 'pytest -c pytest.ini test_query_unittest.py || exit 0'
+                        echo 'junit load...'
+                        junit 'result/junit_results.xml'
                     }
                 }
-                echo 'junit load...'
-                junit 'result/junit_results.xml'
             }
         }
         stage('REST API SERVER / Dev Branch / Docker build') {
