@@ -12,7 +12,6 @@ pipeline {
                 withCredentials([string(credentialsId: 'GIT_TOKEN', variable: 'GIT_TOKEN')]){
                     bat '''
                         git checkout -b test
-                        cd restapi_song
                         git push https://${GIT_TOKEN}@github.com/dnrwn/restapi_song.git test
                     '''
                 }
