@@ -12,7 +12,7 @@ pipeline {
             steps {
                 // Git 설정 및 dev 브랜치의 변경사항을 test 브랜치에 병합
                 withCredentials([string(credentialsId: 'GIT_TOKEN', variable: 'GIT_TOKEN')]) {
-                    sh '''
+                    bat '''
                         git config user.name "dnrwn"
                         git config user.email "sskid12@naver.com"
                         git checkout test
