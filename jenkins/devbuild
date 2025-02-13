@@ -1,0 +1,85 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_HUB_CREDENTIALS = credentials('Docker_ID')
+        RESTAPI_DIR = 'restapi'
+        UNITTEST_DIR = 'unittest'
+    }
+
+    stages {
+        stage('REST API SERVER / dev Branch / Clone') {
+            steps {
+                script {
+                    echo 'Dev Branch Clone...'
+                    bat "if not exist \"${RESTAPI_DIR}\" mkdir \"${RESTAPI_DIR}\""
+                    dir (RESTAPI_DIR) {
+                        git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'dev'
+                    }
+                }
+            }
+        }
+        stage('unittest_song / Clone'){
+            steps{
+                script{
+                    echo 'unittest_song Clone...'
+                    bat "if not exist \"${UNITTEST_DIR}\" mkdir \"${UNITTEST_DIR}\""
+                    dir (UNITTEST_DIR) {
+                        git url: 'https://github.com/dnrwn/unitest_song.git', branch: 'master'
+                        bat 'pip install -r requirements.txt' 
+                    }
+                }
+            }
+        }
+        stage('unittest_song / Run'){
+            steps{
+                script{
+                    dir (UNITTEST_DIR) {
+                        echo 'unittest_song Run...'
+                        // bat 'pytest -c pytest.ini test_query_unittest.py || exit 0'
+                        bat 'pytest -c pytest.ini test_query_unittest.py::test_DB_query_date_1 || exit 0'
+                        echo 'junit loading...'
+                        junit 'result/junit_results.xml'
+                        echo 'test load success'
+                    }
+                }
+            }
+        }
+        stage('REST API SERVER / Dev Branch / Docker build') {
+            when {
+                expression{
+                    currentBuild.result == null || currentBuild.result == 'SUCCESS'
+                }
+            }
+            steps {
+                script {
+                    // docker login user, pw 변수
+                    def dockerUser = env.DOCKER_HUB_CREDENTIALS_USR
+                    def dockerPass = env.DOCKER_HUB_CREDENTIALS_PSW
+
+                    echo 'Logging in to Docker Hub...'
+                    bat "echo ${dockerPass} | docker login -u ${dockerUser} --password-stdin"
+                    
+                    echo 'Building and deploying with Docker Compose...'
+                    dir (RESTAPI_DIR) {
+                        bat 'docker-compose down'
+                        bat 'docker-compose up --build -d'
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'dev branch build job'
+        }
+        success {
+            echo 'dev branch build Succeeded.'
+            build job: 'Test Run' propagate: false
+            echo 'Jenkins Test Run triggered.'
+        }
+        failure {
+            echo 'dev branch build Failed. Jenkins test job did not run.'
+        }
+    }
+}

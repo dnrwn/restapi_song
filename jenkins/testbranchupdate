@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // dev 브랜치 체크아웃
+                git branch: 'dev', url: 'https://github.com/dnrwn/restapi_song.git'
+            }
+        }
+        stage('Merge to Test') {
+            steps {
+                // Git 설정 및 dev 브랜치의 변경사항을 test 브랜치에 병합
+                withCredentials([string(credentialsId: 'GIT_TOKEN', variable: 'GIT_TOKEN')]) {
+                    bat '''
+                        git config user.name "dnrwn"
+                        git config user.email "sskid12@naver.com"
+                        git checkout test
+                        git merge dev || (git merge --abort && exit 1)
+                        if git status | findstr /i "conflict" ; then
+                            echo "Merge conflicts detected. Aborting merge."
+                            git merge --abort
+                            exit 1
+                        else
+                            echo "Merge successful. Pushing changes to test branch."
+                            git push https://${GIT_TOKEN}@github.com/dnrwn/restapi_song.git test
+                        fi
+                    '''
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'test branch update job'
+        }
+        success {
+            echo 'test branch build Succeeded.'
+        }
+        failure {
+            echo 'test branch update Failed.'
+        }
+    }
+}

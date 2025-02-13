@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_HUB_CREDENTIALS = credentials('Docker_ID')
+    }
+    stages {
+        stage('REST API SERVER / test Branch / Clone') {
+            steps {
+                script {
+                    echo 'Dev Branch Clone...'
+                    git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'test'
+                }
+            }
+        }
+        stage('REST API SERVER / test Branch / Docker build') {
+            steps {
+                script {
+                    // docker login user, pw 변수
+                    def dockerUser = env.DOCKER_HUB_CREDENTIALS_USR
+                    def dockerPass = env.DOCKER_HUB_CREDENTIALS_PSW
+
+                    echo 'Logging in to Docker Hub...'
+                    bat "echo ${dockerPass} | docker login -u ${dockerUser} --password-stdin"
+
+                    echo 'Building and deploying with Docker Compose...'
+                    bat 'docker-compose down'
+                    bat 'docker-compose up --build -d'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'test branch build job'
+        }
+        success {
+            echo 'test branch build Succeeded.'
+        }
+        failure {
+            echo 'test branch build Failed.'
+        }
+    }
+}

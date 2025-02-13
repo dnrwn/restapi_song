@@ -1,26 +1,26 @@
 # main.py Unit Test용 요구사항
 
 ## 목차
-- [Common](#common)
-  - [Response](#response)
-- [Route](#route)
-  - [route_default](#route_default)
-  - [route_ui](#route_ui)
-  - [route_func_1](#route_func_1)
-  - [route_func_2](#route_func_2)
-  - [route_func_3](#route_func_3)
-  - [route_func_4](#route_func_4)
-- [Logic](#logic)
-  - [logic_default](#logic_default)
-  - [logic_ui](#logic_ui)
-  - [logic_select](#logic_select)
-  - [logic_update](#logic_update)
-  - [logic_insert](#logic_insert)
-  - [logic_delete](#logic_delete)
+- [Common](#1-common)
+  - [Response](#1-1-response)
+- [Route](#2-route)
+  - [route_default](#2-1-route_default)
+  - [route_ui](#2-2-route_ui)
+  - [route_func_1](#2-3-route_func_1)
+  - [route_func_2](#2-4-route_func_2)
+  - [route_func_3](#2-5-route_func_3)
+  - [route_func_4](#2-6-route_func_4)
+- [Logic](#3-logic)
+  - [logic_default](#3-1-logic_default)
+  - [logic_ui](#3-2-logic_ui)
+  - [logic_select](#3-3-logic_select)
+  - [logic_update](#3-4-logic_update)
+  - [logic_insert](#3-5-logic_insert)
+  - [logic_delete](#3-6-logic_delete)
 
-# Common
+# 1-Common
 
-## Response
+## 1-1-Response
 - **Input**
 
 | Parameter | Type   | Required  | Description    |
@@ -38,9 +38,9 @@
 | Message      | String | - c                                                                                                                                                                                           |
 | Data         | String | - PASS : Response (Json) </br> [{</br> Create_date : str, </br> Update_date : str, </br> idx : int, </br> input_1 : int, </br> input_2 : str, </br> input_3 : str, </br> input_4 : Boolean </br> }] |
 
-# Route
+# 2-Route
 
-## route_default
+## 2-1-route_default
 
 - **Input**
 
@@ -55,7 +55,7 @@
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Return       | - |  - Dicrect Request : Insert, Select, Update, Delete 하이퍼링크 제공 </br>- UI 하이퍼링크 제공 | 
 
-## route_ui
+## 2-2-route_ui
 
 - **Input**
 
@@ -70,7 +70,7 @@
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Return       | - |  UI App 실행 | 
 
-## route_func_1
+## 2-3-route_func_1
 
 - **Input**
 
@@ -85,7 +85,7 @@
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Return       | - |  Select Request 실행 | 
 
-## route_func_2
+## 2-4-route_func_2
 
 - **Input**
 
@@ -100,7 +100,7 @@
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Return       | - |  Update Request 실행 | 
 
-## route_func_3
+## 2-5-route_func_3
 
 - **Input**
 
@@ -115,13 +115,13 @@
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Return       | - |  Insert Request 실행 | 
 
-## route_func_4
+## 2-6-route_func_4
 
 - **Input**
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| rule  | string      |   Mandatory       | rule : '/func_1'              |
+| rule  | string      |   Mandatory       | rule : '/func_4'              |
 | method  | stirng      |   Mandatory       | methods = 'POST', 'DELETE'         |
 
 - **Output**
@@ -130,15 +130,15 @@
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Return       | - |  Delete Request 실행 | 
 
-# Logic
+# 3-Logic
 
-## logic_default
+## 3-1-logic_default
 
 - **Input**
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| route_data         | string      |    Mandatory      | IP, Port 구조 </br> -1.1.1.1:99              |
+| route_data         | string      |    Mandatory      | IP, Port 구조 </br> -1-1-1-1:99              |
 
 - **Output**
 
@@ -146,7 +146,7 @@
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Return       | - |  [route_default](#route_default)와 동일 | 
 
-## logic_ui
+## 3-2-logic_ui
 
 - **Input**
 
@@ -161,13 +161,13 @@
 | Return       | - |  [route_ui](#route_ui)와 동일 | 
 
 
-## logic_select
+## 3-3-logic_select
 
 - **Input**
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| route_data         | dcit      |    Mandatory      | idx : (int) |
+| route_data         | dict      |    Mandatory      | idx : (int) |
 
 - **Output**
 
@@ -175,13 +175,13 @@
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Return       | - |  [route_select](#route_select)와 동일 | 
 
-## logic_update
+## 3-4-logic_update
 
 - **Input**
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| route_data         | dcit      |    Mandatory      | 1. form data </br> - idx: (int)</br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool)  </br> 2. json </br> - idx : (int)</br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool) |
+| route_data         | dict      |    Mandatory      | 1- form data </br> - idx: (int)</br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool)  </br> 2- json </br> - idx : (int)</br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool) |
 
 - **Output**
 
@@ -189,14 +189,14 @@
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Return       | - |  [route_update](#route_update)와 동일 | 
 
-## logic_insert
+## 3-5-logic_insert
 
 
 - **Input**
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| route_data         | dcit      |    Mandatory      | 1. form data </br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool)  </br> 2. json </br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool) |
+| route_data         | dict      |    Mandatory      | 1- form data </br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool)  </br> 2- json </br> - input_1 : (int)</br> - input_2</br> - input_3</br> - input_4 : (bool) |
 
 - **Output**
 
@@ -204,13 +204,13 @@
 |--------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Return       | - |  [route_insert](#route_insert)와 동일 | 
 
-## logic_delete
+## 3-6-logic_delete
 
 - **Input**
 
 | Parameter | Type   | Required  | Description    |
 |-----------|--------|-----------|----------------|
-| route_data         | dcit      |    Mandatory      | 1. POST, form data </br> - idx : (int) </br> 2. DELETE, json </br> - idx : (int) |
+| route_data         | dict      |    Mandatory      | 1- POST, form data </br> - idx : (int) </br> 2- DELETE, json </br> - idx : (int) |
 
 - **Output**
 

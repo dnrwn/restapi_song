@@ -14,10 +14,10 @@ class Database:
         self.cursor = self.db.cursor(pymysql.cursors.DictCursor)
         # server.server.logger.info('DB connect')
 
-    def execute(self, query, args=None):
+    def execute(self, query):
         # server.server.ogger.info('DB EXECUTE')
-        if args is None:
-            args = {}
+        # if args is None:
+        args = {}
         self.cursor.execute(query, args)
         row = self.cursor.fetchall()
         if query.find('SELECT') == 0:
@@ -26,3 +26,5 @@ class Database:
             else:
                 self.db.commit()
         return row
+
+Database = Database()
