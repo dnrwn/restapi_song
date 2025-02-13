@@ -39,6 +39,7 @@ pipeline {
                         bat 'pytest -c pytest.ini test_query_unittest.py'
                     }
                 }
+                echo 'junit load...'
                 junit 'result/junit_results.xml'
             }
         }
