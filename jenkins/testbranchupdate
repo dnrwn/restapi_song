@@ -2,17 +2,26 @@ pipeline {
     agent any
 
     stages {
-        stage('dev branch clone'){
-            steps{
+        stage('dev branch clone') {
+            steps {
                 git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'dev'
             }
         }
         stage('Checkout / Merge') {
             steps {
-                withCredentials([string(credentialsId: 'GIT_TOKEN', variable: 'GIT_TOKEN')]){
+                withCredentials([string(credentialsId: 'GIT_TOKEN', variable: 'GIT_TOKEN')]) {
                     bat '''
-                        git checkout -b test
-                        git push https://${GIT_TOKEN}@github.com/dnrwn/restapi_song.git test
+                        git checkout test
+                        git pull restapi_song test
+                        git merge dev || (git merge --abort && exit 1)
+                        if git status | find /i "conflict"; then
+                            echo "Merge conflicts detected. Aborting merge."
+                            git merge --abort
+                            exit 1
+                        else
+                            echo "Merge successful. Pushing changes to test branch."
+                            git push https://${GIT_TOKEN}@github.com/dnrwn/restapi_song.git test
+                        fi
                     '''
                 }
             }
