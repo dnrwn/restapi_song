@@ -75,7 +75,7 @@ pipeline {
         }
         success {
             echo 'dev branch build Succeeded.'
-            build job: 'Test Run'
+            build job: 'Test Run' propagate: false
             echo 'Jenkins Test Run triggered.'
         }
         failure {
