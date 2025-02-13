@@ -16,7 +16,7 @@ pipeline {
                         git config user.name "dnrwn"
                         git config user.email "sskid12@naver.com"
                         git checkout test
-                        git merge dev
+                        git merge dev || (git merge --abort && exit1)
                         git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dnrwn/restapi_song.git test
                     '''
                 }
