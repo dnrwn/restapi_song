@@ -5,14 +5,14 @@ pipeline {
         stage('Checkout') {
             steps {
                 // dev 브랜치 체크아웃
-                git branch: 'dev', url: 'https://github.com/restapi_song.git'
+                git branch: 'dev', url: 'https://github.com/dnrwn/restapi_song.git'
             }
         }
         stage('Merge to Test') {
             steps {
                 // Git 설정 및 dev 브랜치의 변경사항을 test 브랜치에 병합
                 withCredentials([usernamePassword(credentialsId: 'Github_ID', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    sh '''
+                    bat '''
                         git config user.name "dnrwn"
                         git config user.email "sskid12@naver.com"
                         git checkout test
