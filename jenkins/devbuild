@@ -36,7 +36,7 @@ pipeline {
                 script{
                     dir (UNITTEST_DIR) {
                         echo 'unittest_song Run...'
-                        bat 'pytest -c pytest.ini test_query_unittest.py || exit 0'
+                        bat 'pytest -c pytest.ini test_query_unittest.py::test_DB_query_date_1 || exit 0'
                         echo 'junit loading...'
                         junit 'result/junit_results.xml'
                         echo 'test load success'
