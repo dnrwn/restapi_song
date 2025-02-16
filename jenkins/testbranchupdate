@@ -13,7 +13,7 @@ pipeline {
                     bat 'git config --global user.name "dnrwn"'
                     bat 'git config --global user.email "sskid12@naver.com"'
                     bat 'git checkout test'
-                    bat 'git merge dev'
+                    bat 'git merge -X theirs dev'
                     withCredentials([string(credentialsId: 'GIT_TOKEN', variable: 'GIT_TOKEN')]) {
                         bat 'git push https://dnrwn:$GIT_TOKEN@github.com/dnrwn/restapi_song.git test'
                     }
