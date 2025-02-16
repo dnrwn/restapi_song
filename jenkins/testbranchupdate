@@ -11,6 +11,7 @@ pipeline {
             steps {
                script{
                     bat 'git checkout test'
+                    bat 'git merge dev'
                     bat 'git push origin test'
                }
             }
