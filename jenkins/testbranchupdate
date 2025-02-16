@@ -15,7 +15,7 @@ pipeline {
                     bat 'git checkout test'
                     bat 'git merge -X theirs dev'
                 }
-                withCredentials([string(credentialsId: 'GIT_TOKEN', variable: 'GIT_TOKEN')]) {
+                withCredentials([string(credentialsId: 'token', variable: 'GIT_TOKEN')]) {
                     echo GIT_TOKEN
                     bat 'git push https://dnrwn:$GIT_TOKEN@github.com/dnrwn/restapi_song.git test'
                 }
