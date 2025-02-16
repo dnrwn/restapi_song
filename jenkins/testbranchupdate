@@ -11,8 +11,8 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'GIT_TOKEN', variable: 'GIT_TOKEN')]) {
                     bat '''
-                        git checkout test
                         git pull restapi_song test
+                        git checkout test
                         git merge origin/dev || (git merge --abort && exit 1)
                         if git status | find /i "conflict"; then
                             echo "Merge conflicts detected. Aborting merge."
