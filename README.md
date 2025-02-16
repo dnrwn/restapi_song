@@ -1,6 +1,7 @@
 
 
 ########################################
+
 구조 요약
 1. test_script -> REST API Server -> mySQL -> REST API Server
    - test_script = postman, selenium, python_requests
