@@ -15,7 +15,6 @@ pipeline {
                     bat 'git checkout test'
                     bat 'git merge -X theirs dev'
                     echo token
-                    echo $GIT_TOKEN
                 }
             }
         }
