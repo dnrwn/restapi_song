@@ -10,6 +10,8 @@ pipeline {
         stage('Checkout / Merge') {
             steps {
                script{
+                    bat 'git config --global user.name "dnrwn"'
+                    bat 'git config --global user.email "sskid12@naver.com"'
                     bat 'git checkout test'
                     bat 'git merge dev'
                     withCredentials([string(credentialsId: 'GIT_TOKEN', variable: 'GIT_TOKEN')]) {
