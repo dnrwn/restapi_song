@@ -12,7 +12,8 @@ pipeline {
                script{
                     bat 'git checkout test'
                     bat 'git merge dev'
-                    bat 'git push origin test'
+                    withCredentials([string(credentialsId: env.GIT_CREDENTIALS_ID, variable: 'GIT_TOKEN')]) {
+                        bat 'git push https://dnrwn:$GIT_TOKEN@github.com/restapi_song.git test'
                }
             }
         }
