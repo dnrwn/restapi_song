@@ -12,7 +12,7 @@ pipeline {
                script{
                     bat 'git checkout test'
                     bat 'git merge dev'
-                    withCredentials([string(credentialsId: 'GIT_TOKEN', variable: 'GIT_TOKEN')]) {
+                    withCredentials([string(credentialsId: credentials('GIT_TOKEN'), variable: 'GIT_TOKEN')]) {
                         bat 'git push https://dnrwn:$GIT_TOKEN@github.com/dnrwn/restapi_song.git test'
                     }
                }
