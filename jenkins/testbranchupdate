@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        GIT_TOKEN_CREDENTIALS = credentials('GIT_TOKEN')
+    }
+
     stages {
         stage('dev branch clone') {
             steps {
@@ -12,9 +16,8 @@ pipeline {
                script{
                     bat 'git checkout test'
                     bat 'git merge dev'
-                    withCredentials([string(credentialsId: credentials('GIT_TOKEN'), variable: 'GIT_TOKEN')]) {
-                        bat 'git push https://dnrwn:$GIT_TOKEN@github.com/dnrwn/restapi_song.git test'
-                    }
+                    def git_token = env.GIT_TOKEN_CREDENTIALS_PSW
+                    bat 'git push https://dnrwn:${git_token}@github.com/dnrwn/restapi_song.git test'
                }
             }
         }
