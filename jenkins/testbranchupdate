@@ -14,11 +14,8 @@ pipeline {
                     bat 'git config --global user.email "sskid12@naver.com"'
                     bat 'git checkout test'
                     bat 'git merge -X theirs dev'
-                }
-                withCredentials([string(credentialsId: 'token', variable: 'GIT_TOKEN')]) {
                     echo token
                     echo $GIT_TOKEN
-
                 }
             }
         }
