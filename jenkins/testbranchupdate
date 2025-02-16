@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment{
+        GIT_CREDENTIALS_ID = 'GIT_TOKEN'
+    }
+
     stages {
         stage('dev branch clone') {
             steps {
