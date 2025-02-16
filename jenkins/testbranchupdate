@@ -17,7 +17,8 @@ pipeline {
                 }
                 withCredentials([string(credentialsId: 'token', variable: 'GIT_TOKEN')]) {
                     echo token
-                    bat 'git push https://dnrwn:$GIT_TOKEN@github.com/dnrwn/restapi_song.git test'
+                    echo $GIT_TOKEN
+
                 }
             }
         }
