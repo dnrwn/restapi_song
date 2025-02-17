@@ -9,7 +9,8 @@ pipeline {
         }
         stage('Push to Git') {
             steps {
-              bat 'git remote -v'
+                bat 'git remote -v'
+                bat 'git push origin test'
             }
         }            
     }
