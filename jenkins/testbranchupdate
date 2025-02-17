@@ -7,16 +7,17 @@ pipeline {
                 git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'dev'
             }
         }
-        stage('Checkout / Merge') {
+        stage('Push to Git') {
             steps {
-               script{
-                    bat 'git config --global user.name "dnrwn"'
-                    bat 'git config --global user.email "sskid12@naver.com"'
-                    bat 'git merge dev'
-                    bat 'git push https://github.com/dnrwn/restapi_song test'
+                withCredentials([usernamePassword(credentialsId: 'GIT_ID', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                    sh 'git config user.name "$GIT_USERNAME"'
+                    sh 'git config user.email "sskid12@naver.com"'
+                    sh 'git add .'
+                    sh 'git commit -m "Automated commit"'
+                    sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dnrwn/restapi_song.git test'
                 }
             }
-        }
+        }            
     }
     post {
         always {
