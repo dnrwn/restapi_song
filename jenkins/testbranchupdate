@@ -18,9 +18,7 @@ pipeline {
                     bat 'git checkout test'
                     bat 'git merge -X theirs dev'
                     echo env.DOCKER_HUB_CREDENTIALS
-                }
-                withCredentials([string(credentialsId: 'token', variable: 'GIT_TOKEN')]) {
-                    bat 'git push https://dnrwn:$GIT_TOKEN@github.com/dnrwn/restapi_song.git test'
+                    bat 'git push https://github.com/dnrwn/restpai_song test'
                 }
             }
         }
