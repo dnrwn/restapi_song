@@ -15,8 +15,20 @@ path = config['server']['directory']
 
 # console log 수집 form 정의
 time = datetime.datetime.now().strftime('%y%m%d_%H%M%S')
-logging.basicConfig(filename=f'{path}log/server_{time}.log', level=logging.INFO,
-                    format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
+log_format = '%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s' # 로그 포맷 설정
+
+logger = logging.getLogger('server') # 로거 생성
+logger.setLevel(logging.INFO)
+
+file_handler = logging.FileHandler(f'{path}log/server_{time}.log') # 파일 핸들러 설정
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(logging.Formatter(log_format))
+
+console_handler = logging.StreamHandler() # 콘솔 핸들러 설정
+console_handler.setLevel(logging.INFO)
+console_handler.setFormatter(logging.Formatter(log_format))
+
+logger.addHandler(file_handler) # 핸들러를 로거에 추가
 
 # Response form 정의
 def response(a, b=None, c=None):
