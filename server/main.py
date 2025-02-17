@@ -100,8 +100,12 @@ def logic_update(route_data): # Update
             val = route_data.form.to_dict()
             val['idx'] = int(val['idx'])
             val['input_1'] = int(val['input_1'])
-            val['input_4'] = bool(val['input_4'])
-
+            if val['input_4'].lower() == 'false':
+                val['input_4'] = False
+            elif val['input_4'].lower() == 'true':
+                val['input_4'] = True
+            else:
+                raise ValueError('Invalid input: Expected "false" or "true"')
         else:
             val = route_data.get_json()
         db.Database.execute(Query.get_select_one(int(val['idx'])))
@@ -120,7 +124,6 @@ def logic_insert(route_data): # Insert
     try:
         if len(route_data.form) != 0:
             val = route_data.form.to_dict()
-            server.logger.info(val['input_4'])
             val['input_1'] = int(val['input_1'])
             if val['input_4'].lower() == 'false':
                 val['input_4'] = False
@@ -128,7 +131,6 @@ def logic_insert(route_data): # Insert
                 val['input_4'] = True
             else:
                 raise ValueError('Invalid input: Expected "false" or "true"')
-            server.logger.info(val['input_4'])
         else:
             val = route_data.get_json()
             server.logger.info(val['input_4'])
