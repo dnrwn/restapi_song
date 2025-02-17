@@ -42,8 +42,8 @@
 1. jenkins/testbranchupdate 파일 수정
    - 젠킨스 파이프라인에서 git push 동작 수행
    - 이슈 : git push 인증 부분에 문제 있음 (password 인증 미지원 이슈)
-   - 해결 못함 추가 검토 필요
-
+   -  인증하지 않고 git push 실행
+  
 ## 2025-02-07 업데이트
 1. DB 인스턴스 생성하는 부분을 잘못 삭제해서 query가 보내지지 않는 문제 수정
 2. input_4 type 예외처리 반영
