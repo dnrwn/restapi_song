@@ -10,6 +10,7 @@ pipeline {
         stage('Push to Git') {
             steps {
                 bat 'git remote -v'
+                bat 'git checkout test'
                 bat 'git push origin test'
             }
         }            
