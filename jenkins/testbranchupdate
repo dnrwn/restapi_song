@@ -1,27 +1,23 @@
 pipeline {
     agent any
-    environment {
-        TO = credentials('token')
-        DOCKER_HUB_CREDENTIALS = credentials('Docker_ID')
-    }
+
     stages {
         stage('dev branch clone') {
             steps {
                 git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'dev'
             }
         }
-        stage('Checkout / Merge') {
+        stage('Push to Git') {
             steps {
-               script{
-                    bat 'git config --global user.name "dnrwn"'
-                    bat 'git config --global user.email "sskid12@naver.com"'
+                withCredentials([usernamePassword(credentialsId: 'GIT_ID', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                    bat 'git config user.name "$GIT_USERNAME"'
+                    bat 'git config user.email "sskid12@naver.com"'
                     bat 'git checkout test'
-                    bat 'git merge -X theirs dev'
-                    echo env.DOCKER_HUB_CREDENTIALS
-                    bat 'git push https://github.com/dnrwn/restpai_song test'
+                    bat 'git merge dev'
+                    bat 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dnrwn/restapi_song.git test'
                 }
             }
-        }
+        }            
     }
     post {
         always {
