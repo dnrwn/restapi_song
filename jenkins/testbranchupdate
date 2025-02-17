@@ -12,7 +12,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'GIT_ID', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                     bat 'git config user.name "$GIT_USERNAME"'
                     bat 'git config user.email "sskid12@naver.com"'
-                    bat 'git add .'
+                    bat 'git merege dev'
                     bat 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dnrwn/restapi_song.git test'
                 }
             }
