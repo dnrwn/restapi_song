@@ -14,8 +14,7 @@ pipeline {
                     bat 'git config user.email "sskid12@naver.com"'
                     bat 'git checkout test'
                     bat 'git merge dev'
-                    bat 'echo %TOKEN%'
-                    bat 'git push https://${TOKEN}@github.com/dnrwn/restapi_song.git test'
+                    bat 'git push https://sadsadsadsad@github.com/dnrwn/restapi_song.git test'
                 }
             }
         }            
