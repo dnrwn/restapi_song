@@ -122,7 +122,12 @@ def logic_insert(route_data): # Insert
             val = route_data.form.to_dict()
             server.logger.info(val['input_4'])
             val['input_1'] = int(val['input_1'])
-            val['input_4'] = bool(val['input_4'])
+            if val['input_4'].lower() == 'false':
+                val['input_4'] = False
+            elif val['input_4'].lower() == 'true':
+                val['input_4'] = True
+            else:
+                raise ValueError('Invalid input: Expected "false" or "true"')
             server.logger.info(val['input_4'])
         else:
             val = route_data.get_json()
