@@ -13,7 +13,7 @@ pipeline {
                     bat 'git config --global user.name "dnrwn"'
                     bat 'git config --global user.email "sskid12@naver.com"'
                     bat 'git merge dev'
-                    bat 'git push https://github.com/dnrwn/restpai_song test'
+                    bat 'git push https://github.com/dnrwn/restapi_song test'
                 }
             }
         }
