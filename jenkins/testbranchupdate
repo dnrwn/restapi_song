@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('dev branch clone') {
+            steps {
+                git url: 'https://github.com/dnrwn/restapi_song.git', branch: 'dev'
+            }
+        }
+        stage('Push to Git') {
+            steps {
+              bat 'git remote -v'
+            }
+        }            
+    }
+    post {
+        always {
+            echo 'test branch update job'
+        }
+        success {
+            echo 'test branch build Succeeded.'
+        }
+        failure {
+            echo 'test branch update Failed.'
+        }
+    }
+}
