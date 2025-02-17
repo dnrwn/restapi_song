@@ -15,7 +15,6 @@ class Database:
         # server.server.logger.info('DB connect')
 
     def execute(self, query):
-        print(query)
         # if args is None:
         args = {}
         self.cursor.execute(query, args)

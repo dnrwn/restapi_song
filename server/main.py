@@ -146,6 +146,7 @@ def logic_insert(route_data): # Insert
         else:
             val = route_data.get_json()
             server.logger.info(val['input_4'])
+        server.logger.info(Query.post_insert(val))
         db.Database.execute(Query.post_insert(val))
         a = db.Database.execute(Query.get_select_all())
         b = response(1, 'Insert')
