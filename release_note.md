@@ -3,40 +3,31 @@
 - [업데이트](#업데이트)
 
 # 예정
-## 0. input_4에 값이 제대로 들어가지 않는 이슈 있음
-- 어떤 값을 넣어도 다 1로 삽입됨
+## 1. 새로 작성한 요구사항을 기준으로 기존에 설계한 Test Script도 정리 필요
+- `Selenium`
 
-## 1. 유닛 테스트용 Test Script 추가
-- 대상: `Query.py`, `main.py` (`db.py` 제외)
-  - 유닛 테스트의 경우 server를 통하지 않고 직접 소스에 접근하는 개념으로 하기 때문에 `db return`을 만들어서 테스트하기엔 db에 대한 숙련도가 낮아서 소요 시간이 길어짐
-
-## 2. 새로 작성한 요구사항을 기준으로 기존에 설계한 Test Script도 정리 필요
-- `excel_read`, `Selenium`, `Postman`
-
-## 3. 파일 정리
+## 2. 파일 정리
 - `README` 파일 정리 검토 (P2)
   - 내용 정리, 통합 등 최신화
 - `pytest init.py` 파일 위치 정리 필요 (P2)
 - `포트폴리오 리뷰.pdf` 파일 정리 (P3) # P2건 모두 정리된 이후 수행
 
-## 4. 초기 MySQL 셋업할 때 root 계정 비밀번호 생성하는 코드 추가 필요
+## 3. 초기 MySQL 셋업할 때 root 계정 비밀번호 생성하는 코드 추가 필요
 - `init.sql`에 root 계정의 비밀번호가 드러나 있으므로 보안 문제 해결 필요
 
-## 5. DB Data 복호화 Key / Value 파일 관리 방안 검토 필요
+## 4. DB Data 복호화 Key / Value 파일 관리 방안 검토 필요
 - 현재는 Server 내부에서 관리
 - Github를 통해 clone하고 다 사용하면 delete하는 방식을 검토하였으나 추가 검토 필요
 - MySQL에 해당 기능이 있으나 조금 더 조사 필요 (`MySQL Transparent Data Encryption`)
 - 암호화 하는 함수를 Server에 내장하는 건 원본 data를 Server에서 가지고 있어야 하기 때문에 암호화하는 의미가 없음
 
-## 6. DB 쪽 로그 Import 문제 있음
+## 5. DB 쪽 로그 Import 문제 있음
 - `main.py` 기준으로 자기를 import 못함
   - 경로 문제인지, 상호 참조 문제인지 검토 필요
   - DB 쪽도 Logger를 main과 공유하여 사용하길 원함
   - 안되면 DB용 logging 코드 추가 필요
 
 # 업데이트
-
-
 ## 2025-02-17 업데이트
 1. jenkins/testbranchupdate 파일 수정
    - 젠킨스 파이프라인에서 git push 동작 수행
@@ -44,7 +35,18 @@
    -  인증하지 않고 git push 실행
 
 2. docker에 빌드한 뒤에 unittest를 수행하도록 되어 있는데, unittest 수행 후에 빌드하도록 수정 완료
-  
+3. input_4에 값이 제대로 들어가지 않는 이슈 수정
+   - bool type 변환 시 문자열이 비어 있는지, 아닌지에 따라 true, false로 판단함
+   - 해결 : if문을 통해 원하는 문자열이 들어오면 직접 True, Fasle를 삽입하도록 수정, 원하지 않은 문자열일 경우 Error 발생
+
+4. 유닛 테스트용 Test Script 추가 완료
+- 대상: `Query.py`
+  - `db.py` 제외 : 유닛 테스트의 경우 server를 통하지 않고 직접 소스에 접근하는 개념으로 하기 때문에 `db return`을 만들어서 테스트하기엔 db에 대한 숙련도가 낮아서 소요 시간이 길어짐
+  - `main.py` 제외 : Flask 모듈을 사용해서 Mock을 따로 선언해야 하나, 해당 부분은 경험이 없어서 적용 보류
+
+5. 새로 작성한 요구사항을 기준으로 기존에 설계한 Test Script도 정리 완료
+- `excel_read`, `Postman`
+
 ## 2025-02-07 업데이트
 1. DB 인스턴스 생성하는 부분을 잘못 삭제해서 query가 보내지지 않는 문제 수정
 2. input_4 type 예외처리 반영
